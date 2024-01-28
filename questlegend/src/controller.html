@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Le Pendu</title>
+</head>
+<body id="body-controller">
+    <div id="controller">
+        <div class="controller-section" id="stage-0">
+            <p>
+                Choose your word
+            </p>
+            <div>
+                <input type="text" name="" id="word-field">
+                <button id="next">Next</button>
+            </div>
+    
+        </div>
+        <div id="stage-1">
+            <p>
+                Choose a letter
+            </p>
+            <div>
+                <input type="text" name="" id="letter-field">
+                <button id="choose">Choose</button>
+            </div>
+    
+        </div>
+        <div id="stage-2">
+            <p id="win-status">
+                Win ?
+            </p>
+            <div>
+                
+                <button id="replay">Replay</button>
+            </div>
+    
+        </div>
+
+    </div>
+    
+    
+    
+    
+    <script src="lib/legend.js"></script>
+    <script src="scripts/game.controller.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script>
+        var legend = new Legend('controller');
+        legend.onReady(() => {
+            //start page script
+            new ControllerGame(legend);
+        });
+        
+    </script>
+    
+</body>
+</html>

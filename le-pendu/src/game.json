@@ -1,0 +1,9 @@
+{
+    "name" : "QuestLegend",
+    "icon" : "icon.png",
+    "banner" : "banner.jpg",
+    "description_file" : false,
+    "description" : "Question pour un champion",
+    "controller" : "controller.html",
+    "monitor": "monitor.html"
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style/style.css">
+        <title>Le Pendu</title>
+    </head>
+    <body>
+        <div id="wrong-error">
+            <h1> Faux </h1>
+        </div>
+        <div id="monitor">
+            <div id="lives">
+                
+               <!--<h3>Lives : <sapn id="lives-value"></sapn></h3>-->
+                
+            </div>
+            <div id="background-pres">
+                <!-- background aera-->
+                <h1 id="big-title">
+                    LE PENDU
+                </h1>
+                <h2 id="letters-list">
+                
+                </h2>
+                <h2 id="lose">
+                    Game Over !!
+                </h1>
+                <h2 id="win">
+                    You win !!
+                </h1>
+            </div>
+            
+            
+        </div>
+        
+        <script src="lib/legend.js"></script>
+        <script src="scripts/game.monitor.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script>
+            var legend = new Legend('monitor');
+            legend.onReady(() => { 
+                //start page script
+                new MonitorGame(legend);
+            });
+
+        </script>
+    </body>
+</html>

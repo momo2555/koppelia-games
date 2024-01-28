@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style/style.css">
+        <!--<link rel="stylesheet" href="game/style/style.css" >-->
+    </head>
+    <body class="screen">
+        
+        <header>
+            <div class="menu-buttons">
+                <div class="params-button menu-buttons">
+
+                </div>
+            </div>
+            
+        </header>
+
+        <div class="screen" id="content">
+            <div id="step-home" class="step-block">
+
+            </div>
+            <div id="step-identify" class="step-block">
+
+            </div>
+            <div id="step-themes" class="step-block">
+
+            </div>
+            <div id="step-play" class="step-block">
+                <div id="quest-buzz">
+                    <p>
+                        
+                    </p>
+                </div>
+                <div id="quest-quest-bloc"><p></p></div>
+                <div id="quest-more"><p></p></div>
+                <div id="right-answer"><p></p></div>
+            </div>
+        </div>
+        <div class="params-box params-box-closed">
+            <!-- menu gauche -->
+            <div class="params-left">
+                
+            </div>
+            <!-- menu droite -->
+            <div class="params-right"></div>
+        </div>
+        <div id="background">
+            <p>
+                QuestLegend
+            </p>
+        </div>
+        <footer>
+
+        </footer>
+
+        <script src="lib/legend.js"></script>
+        <script src="scripts/game.monitor.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script>
+            var legend = new Legend('monitor');
+            legend.onReady(() => { 
+                //start page script
+                new MonitorGame(legend);
+            });
+
+        </script>
+        
+        
+    </body>
+</html>
