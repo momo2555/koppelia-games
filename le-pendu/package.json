@@ -1,12 +1,12 @@
 {
-  "name": "questlegend",
+  "name": "le-pendu",
   "version": "1.0.0",
-  "description": "Question pour un champion",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mohamed Al Glawi",
+  "author": "momo",
   "license": "ISC",
   "dependencies": {
     "legendary": "github:momo2555/legendary"

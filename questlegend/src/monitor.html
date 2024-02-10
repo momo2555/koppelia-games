@@ -1,41 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style/style.css">
-        <title>Le Pendu</title>
+        <!--<link rel="stylesheet" href="game/style/style.css" >-->
     </head>
-    <body>
-        <div id="wrong-error">
-            <h1> Faux </h1>
-        </div>
-        <div id="monitor">
-            <div id="lives">
-                
-               <!--<h3>Lives : <sapn id="lives-value"></sapn></h3>-->
-                
-            </div>
-            <div id="background-pres">
-                <!-- background aera-->
-                <h1 id="big-title">
-                    LE PENDU
-                </h1>
-                <h2 id="letters-list">
-                
-                </h2>
-                <h2 id="lose">
-                    Game Over !!
-                </h1>
-                <h2 id="win">
-                    You win !!
-                </h1>
-            </div>
-            
-            
-        </div>
+    <body class="screen">
         
+        <header>
+            <div class="menu-buttons">
+                <div class="params-button menu-buttons">
+
+                </div>
+            </div>
+            
+        </header>
+
+        <div class="screen" id="content">
+            <div id="step-home" class="step-block">
+
+            </div>
+            <div id="step-identify" class="step-block">
+
+            </div>
+            <div id="step-themes" class="step-block">
+
+            </div>
+            <div id="step-play" class="step-block">
+                <div id="quest-buzz">
+                    <p>
+                        
+                    </p>
+                </div>
+                <div id="quest-quest-bloc"><p></p></div>
+                <div id="quest-more"><p></p></div>
+                <div id="right-answer"><p></p></div>
+            </div>
+        </div>
+        <div class="params-box params-box-closed">
+            <!-- menu gauche -->
+            <div class="params-left">
+                
+            </div>
+            <!-- menu droite -->
+            <div class="params-right"></div>
+        </div>
+        <div id="background">
+            <p>
+                QuestLegend
+            </p>
+        </div>
+        <footer>
+
+        </footer>
+
         <script src="lib/legend.js"></script>
         <script src="scripts/game.monitor.js"></script>
         <script src="scripts/jquery.js"></script>
@@ -47,5 +68,7 @@
             });
 
         </script>
+        
+        
     </body>
 </html>

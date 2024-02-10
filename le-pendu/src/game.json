@@ -1,9 +1,9 @@
 {
-    "name" : "QuestLegend",
+    "name" : "Le pendu",
     "icon" : "icon.png",
     "banner" : "banner.jpg",
     "description_file" : false,
-    "description" : "Question pour un champion",
+    "description" : "C'est le jeu officiel du pendu !",
     "controller" : "controller.html",
     "monitor": "monitor.html"
 }

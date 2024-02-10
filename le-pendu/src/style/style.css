@@ -1,627 +1,100 @@
-@font-face {
-    font-family: Luciole;
-    src: url(fonts/Luciole-Regular.ttf);
-}
-@font-face {
-    font-family: Luciole;
-    src: url(fonts/Luciole-Regular-Italic.ttf);
-    font-style: italic;
-}
-@font-face {
-    font-family: Luciole;
-    src: url(fonts/Luciole-Bold.ttf);
-    font-weight: bold;
-}
-@font-face {
-    font-family: Luciole;
-    src: url(fonts/Luciole-Bold-Italic.ttf);
-    font-style: italic;
-    font-weight: bold;
-}
 * {
     box-sizing: border-box;
-    font-family: 'Luciole';
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.buzz #buzzer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+html {
     height: 100%;
-    
 }
-.hide {
-    display : none;
-}
-@media (max-width: 400px) {
-
-}
-body.master {
+body {
+    background-color: #275327;
     margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-
+    min-height: 100%;
 }
-.master h2 {
-    
-    font-weight: 100;
-}
-.master #content {
-    padding-top: 40px;
-}
-.master header {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    left: 0;
-    top: 0;
+#monitor {
     width: 100%;
-    height: 40px;
-    z-index: 999999999999;
-    background-color: #1DCF6A;
-}
-.master .buttons-container {
+    height: 100vh;
     display: flex;
-    margin: auto;
-    width: auto;
-    justify-content: center;
-}
-.master .header-button {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    color: white;
-    cursor: pointer;
-}
-.master .header-button:hover {
-    background-color: #18a053;
-}
-.master .header-button p {
-    margin: auto;
-    color: inherit;
-    font-size: 20px;
     
 }
-
-.master .menu-item {
-    width: 300px;
-    height: 300px;
-    margin: auto;
-    margin-top: 10px;;
-    overflow: hidden;
-    border-radius: 20px;
-    border: 4px solid #1DCF6A;
-    cursor: pointer;
-}
-#start-game {
-    background-image: url('../image/play.png');
-    background-size: 80% 80%;
-    background-position: center center;
-    background-repeat: no-repeat;
+#monitor #background-pres {
     
-}
-#game-manager {
-    background-image: url('../image/questions.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-.master .theme-list-element {
     display: flex;
-    cursor: pointer;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-.master .theme-list-element .thumb  {
-    height: 100px;
-    width: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    
-}
-.master .theme-list-element .thumb img  {
-    height: 100px;
-}
-.master .theme-list-element p {
-    flex: 1;
-    margin: auto;
-    padding-left: 40px;
-    font-size: 20px;
-}
-.master .theme-list-element:nth-child(2n) {
-    background-color: #f7d3d3;
-}
-.master .theme-list-element:hover {
-    background-color: rgb(158, 29, 29);
-    color: #ffffff;
-}
-.master #add-theme-box {
-    display: flex;
-    height: 240px;
-    padding: 20px;
-}
-.master #add-theme-box .left {
-    flex: 1;
-    padding-right: 20px;
-}
-.master #add-theme-box .right {
     height: 100%;
-    width: 240px;
-}
-.master #add-theme-box .button {
-    cursor: pointer;
-}
-.master #add-theme-button {
-    background-image: url('../image/plus.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 80% 80%;
-    width: 100%;
-    height: 100%;
-
-}
-.master #add-theme-name {
-    width: 100%;
-    height: 30px;
-    padding-left: 15px;
-    padding-right: 15px;
-
-} 
-.master .quest-list-element {
-    padding: 20px;
-    cursor: pointer;
-}
-.master .quest-list-element:nth-child(2n){
-    background-color: #f7d3d3;
-}
-.master .quest-list-element:hover {
-    background-color: rgb(158, 29, 29);
-    color: #ffffff;
-}
-.master .quest-list-element .quest-list-in {
-    display: flex;
-}
-.master .quest-list-element .quest-list-in p {
     flex: 1;
-}
-.master .quest-list-element .quest-list-in p:hover  {
-    text-decoration: underline;
-}
-.master .quest-list-element .quest-list-in .delete {
-    width: 50px;
-    border-radius: 15px;
-    background-image: url('../image/delete.webp');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 40px auto;
-    cursor: pointer;
-
-}
-.master .quest-list-element .quest-list-in .delete:hover {
-    background-color: #f7d3d3;
-}
-.master .add-quest {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-image: url('../image/plus.png');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 80% 80%;
-    cursor: pointer;
-}
-.master .add-quest:hover {
-    background-color: #1DCF6A;
-}
-.master #quest-edit .hide{
-    display: none;
-}
-.master #quest-edit {
-    padding: 20px;
-}
-.master textarea {
-    width: 90%;
-    height: 200px;
-    margin: auto;
-    max-width: 90%;
-    min-width: 90%;
-    max-height: 300px;
-    border-radius: 10px;
-
-}
-.master #quest-edit-answer {
-    width: 90%;
-    margin: auto;
-    height: 30px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.master .quest-media-div {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.master #quest-edit-submit {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-image: url('../image/save.ico');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 80% 80%;
-    cursor: pointer;
-}
-
-.master #quest-edit-submit:hover {
-    background-color: #1DCF6A;
-}
-.master #player-edit-block {
-    min-height: 300px;
-    width: 100%;;
-}
-.master .next-player {
-    width: 100%;
-    background-color: #1DCF6A;
-    padding: 12px;
-    cursor: pointer;
-}
-.master .next-player p{
-    width: 100%;
-    margin: 10px;
-    margin: auto;
-    color: white;
-    text-align: center;
-}
-.master #player-save-button {
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    background-image: url('../image/save.ico');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 80% 80%;
-    cursor: pointer;
-}
-.master #player-name {
-    width: 100%;
-    height: 40px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 4px;
-    font-size: 20px;
-}
-.master #player-edit-block {
-    padding: 20px;
-}
-.master .check-theme {
-    width: 40px;
-    height: 40px;
-}
-.master #next-theme {
-    width: 100%;
-    background-color: #1DCF6A;
-    padding: 12px;
-    cursor: pointer;
-}
-.master #next-theme p{
-    width: 100%;
-    margin: 10px;
-    margin: auto;
-    color: white;
-    text-align: center;
-}
-.master .step3-content {
-    padding: 20px;
-
-}
-.master #quest-box {
-    border: 2px solid  #1DCF6A;
-    border-radius: 10px;
-    padding: 15px;
-
-}
-.master #quest-box p {
-
-}
-.master #quest-answer {
-    color:#1DCF6A;
-}
-.master #quest-buzzing {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    border-radius: 5px;
-}
-.master #quest-buzzing p {
-    margin: auto;
-    text-align: center;
-}
-.master .action-buttons p {
-    font-size: 30px;
-    margin: auto;
-    
-}
-.master .action-buttons div {
-    border-radius: 10px;
-    display: flex;
-    cursor: pointer;
-}
-.master .action-buttons {
-    display: flex;
-    height: 100px;
-
-}
-.master #quest-true {
-    margin: 8px;
-    background-color:  rgb(151, 231, 140);
-    color: rgb(42, 100, 24);
-    flex: 1;
-}
-.master #quest-false {
-    margin: 8px;
-    background-color:  rgb(219, 145, 145);
-    color: rgb(136, 18, 18);
-    flex: 1;
-}
-.master .action-buttons.hide {
-    display: none;
-}
-.master #quest-next { 
-    margin: 8px;
-    background-color:  rgb(231, 222, 140);
-    color: rgb(211, 181, 12);
-    flex: 1;
-}
-.master #quest-quest { 
-    margin: 8px;
-    background-color:  rgb(139, 255, 185);
-    color: rgb(0, 89, 39);
-    flex: 1;
-}
-.master #quest-play { 
-    background-image: url('../image/screen.png');
-    background-position: center center;
-    background-size: auto 80%;
-    background-repeat: no-repeat;
-    flex: 1;
-    margin: 8px;
-    background-color: rgb(180, 211, 223);
-}
-
-
-
-
-
-
-
-
-
-
-.screen {
-    background-color: #6db1f2;
-}
-.screen header{
-    position: fixed;
-    width: 100%;
-    height: 40px;
-    top: 0;
-    left: 0;
-}
-.screen .menu-buttons {
-    display: flex;
-    height: 40px;
-}
-.screen .menu-button {
-    /*bouton de paramètre*/
-    width: 40px;
-    height: 40px;
-    color: rgb(226, 226, 226);
-    cursor: pointer;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    display: flex;
-    font-size: 20px;
-}
-.screen .menu-button i{
-    display: flex;
-    margin: auto;
-}
-.params-box {
-
-}
-.params-box-closed {
-    display: none;
-}
-.screen .params-button {
-
-}
-.screen #content {
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    height: calc(100% - 90px);
-    top: 40px;
-    left: 0;
-    background-color: transparent;
-}
-.screen footer {
-    position: fixed;
-    height: 50px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-}
-.screen #background {
-    position: fixed;
-    width: 100%;
-    height: calc(100% - 90px);
-    top: 40px;
-    left: 0;
-    opacity: 60%;
-    display: flex;
-}
-.screen #background p {
-    font-size: 124px;
-    color: white;
-    margin: auto;
-    font-style: italic;
-    font-family: ui-monospace;
-
-}
-.screen .theme-stage {
-    margin: auto;
-    display: flex;
-}
-.screen .theme-elem {
-    display: flex;
     flex-direction: column;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(62, 101, 160, 0.562);
-    margin: 3px;
-
-
-}
-.screen .theme-image {
-    height: calc(100% - 30px);
-    width: 100%;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    overflow: hidden;
-}
-.screen .theme-elem p {
-    /*height: 40px;*/
-    padding-top: 6px;
-    margin: 0;
-    width: 100%;
-    height: 30px;
-    color: rgb(227, 239, 248);
-    text-align: center;
-}
-.screen .theme-selected {
-    border: 4px solid rgb(218, 122, 122);
-}
-.screen #players-box {
-    display: flex;
-    width: 100%;
-    height: 100%;
-
-}
-.screen #players-box-in {
-    display: flex;
-    flex: 1;
-
-}
-.screen #players-box-in-color {
-    margin: auto;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    opacity: 0.9;
-
-}
-.screen #players-list {
-    width: 320px;
-    padding: 15px;
-}
-.screen .players-list-item {
-    height: 40px;
-    display: flex;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(62, 101, 160, 0.562);
-    margin: 5px;
-}
-.screen .players-color {
-    width: 40px;
-    height: 40px;
     
 }
-.screen .players-name {
+#body-controller {
     display: flex;
-    flex: 1;
 }
-.screen .players-name p {
+#controller {
     margin: auto;
-    color: #ffffff;
 }
-.screen #quest-buzz {
-    width: calc(100%-40px);
-    height: 200px;
-    border-radius: 20px;
-    font-size: 60px;
-    display: flex;
-    margin: 20px;
-
-}
-.screen #quest-buzz p{
-    background-color: #ffffff;
-    padding: 10px;
-    font-weight: bold;
-    margin: auto;
-    border-radius: 5px;
-
-}
-.screen #quest-more {
-    width: 100%;
-    height: calc(100% - 200px);
-    display: flex;
-}
-.screen #quest-quest-bloc {
-    background-color: white;
-    padding: 20px;
-}
-.screen #quest-quest-bloc p {
-    font-size: 40px;
-    font-weight: bold;
-}
-.screen #right-answer{
-    height: 400px;
-    display: flex;
-    background-color: #18a053;
-    border-radius: 20px;
-    margin: 30px;
-    padding: 30px;
-    width: calc(100% - 60px);
-}
-
-.screen #right-answer p{
-    margin: auto;
-    font-size: 80px;
+#controller p {
     color: white;
-    text-align: center;
 }
-.screen #quest-more ul{
-    margin: auto;
-    /*color: white;*/
-    font-size: 45px;
-    text-shadow: 0 0 10px rgba(50, 48, 71, 0.651);
-    list-style-type: upper-latin;
-    color: #000000a8;
-    background-color: #ffffffb3;
-    display: block;
-    padding: 90px;
-    border-radius: 40px;
-
-}
-.screen .playerscore {
-    display: flex;
-}
-.screen .playcolor {
-    display: flex;
-    overflow: hidden;
-    border-radius: 5px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-}
-.screen .playerscore p {
+#background-pres h1 {
+    font-size: 130px;
     margin: auto;
     color: white;
-    font-size: 25px;
+    font-weight: 200;
+
+
 }
-.screen #step-themes {
+#lives {
+    width: 25%;
     height: 100%;
-} 
-
-
+    top: 20px;
+    left: 30px;
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+#lives img {
+    margin: auto;
+}
+#lives h3 {
+    color: white;
+    margin-left: 15px;
+}
+#lose {
+    background-color: white;
+    color: red;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 50px;
+    margin: auto;
+}
+#win {
+    background-color: white;
+    color: green;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 50px;
+    margin: auto;
+}
+#letters-list {
+    color: white;
+    margin: auto;
+    display: none;
+    font-size: 35px;
+}
+#wrong-error {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    background-color: rgba(233, 192, 192, 0.86);;
+    border-radius: 20px;
+    left: 25%;
+    top: 25%;
+    z-index: 9999999;
+    display: flex;
+    
+}
+#wrong-error h1 {
+    color: red;
+    margin: auto;
+    font-size: 50;
+}

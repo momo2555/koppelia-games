@@ -1,61 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="style/style.css">
-    <title>Le Pendu</title>
+    <!--<link rel="stylesheet" href="game/style/style.css"  media="screen">-->
+    <!--<link rel="stylesheet" href="game/style/foundation/foundation-icons.css"  media="screen">-->
 </head>
-<body id="body-controller">
-    <div id="controller">
-        <div class="controller-section" id="stage-0">
-            <p>
-                Choose your word
-            </p>
-            <div>
-                <input type="text" name="" id="word-field">
-                <button id="next">Next</button>
+
+<body class="master">
+    <header>
+        <!-- boutons du menu du haut-->
+        <div class="buttons-container">
+            <div class="header-button" id="play-music-0">
+                <p>
+                    0
+                </p>
+
             </div>
-    
-        </div>
-        <div id="stage-1">
-            <p>
-                Choose a letter
-            </p>
-            <div>
-                <input type="text" name="" id="letter-field">
-                <button id="choose">Choose</button>
+            <div class="header-button" id="play-music-1">
+                <p>
+                    1
+                </p>
+
             </div>
-    
-        </div>
-        <div id="stage-2">
-            <p id="win-status">
-                Win ?
-            </p>
-            <div>
-                
-                <button id="replay">Replay</button>
+            <div class="header-button" id="play-music-2">
+                <p>
+                    2
+                </p>
+
             </div>
-    
         </div>
 
-    </div>
-    
-    
-    
-    
-    <script src="lib/legend.js"></script>
-    <script src="scripts/game.controller.js"></script>
-    <script src="scripts/jquery.js"></script>
-    <script>
-        var legend = new Legend('controller');
-        legend.onReady(() => {
-            //start page script
-            new ControllerGame(legend);
-        });
-        
-    </script>
-    
+    </header>
+
+    <div id="content">
+        <div id="step-home" class="step-block"> <!-- menu principale-->
+            <div class="menu-item" id="start-game">
+            </div>
+            <div class="menu-item" id="game-manager">
+            </div>
+        </div>
+
+        <div id="step-identify" class="step-block"> <!-- Identification des joueurs -->
+            <div id="player-edit-block">
+                <h2>
+                    Joueur id : <span id="player-id"></span>
+                </h2>
+                <input type="text" id="player-name">
+                <div id="player-save-button"></div>
+            </div>
+            <div class="next-player">
+                <p>Suivant</p>
+            </div>
+        </div>
+
+        <div id="step-themes" class="step-block"> <!-- Choix des thèmes -->
+            <center>
+                <h2>Choisir les thèmes</h2>
+            </center>
+            <div id="themes-list">
+
+            </div>
+            <div id="next-theme">
+                <p>Suivant</p>
+            </div>
+        </div>
+
+        <div id="step-play" class="step-block">
+            <div class="step3-content">
+                <h2>Question:</h2>
+                <div id="quest-box">
+                    <p></p>
+                </div>
+                <h2>Réponse:</h2>
+                <p id="quest-answer"></p>
+                <div id="quest-buzzing">
+                    <p></p>
+                </div>
+                <div class="action-buttons false-true-buttons">
+                    <div id="quest-true" class="quest-butt">
+                        <p>Vrai</p>
+                    </div>
+                    <div id="quest-false" class="quest-butt">
+                        <p>Faux</p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    <div id="quest-next" class="quest-butt">
+                        <p>></p>
+                    </div>
+                    <div id="quest-quest" class="quest-butt">
+                        <p>Q</p>
+                    </div>
+                </div>
+                <div class="action-buttons">
+                    
+                    <div id="quest-play" class="quest-butt">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="lib/legend.js"></script>
+        <script src="scripts/game.controller.js"></script>
+        <script src="scripts/jquery.js"></script>
+        <script>
+            var legend = new Legend('controller');
+            legend.onReady(() => {
+                //start page script
+                new ControllerGame(legend);
+            });
+
+        </script>
+
 </body>
+
 </html>
