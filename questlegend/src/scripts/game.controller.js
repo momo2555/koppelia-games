@@ -30,7 +30,7 @@ class ControllerGame {
         this.initEvents();
         this.loadDataBase();
 
-        this.availableColors =[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [0, 255, 255]];
+        this.availableColors =[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
         this.buzzerTab = {};
         /* 
         player = {
@@ -56,8 +56,8 @@ class ControllerGame {
     colorToBuzzColor(color) {
         return [
             {type : "int", r : color[0]},
-            {type : "int", r : color[1]},
-            {type : "int", r : color[2]}
+            {type : "int", g : color[1]},
+            {type : "int", b : color[2]}
         ]
     }
     colorToHtmlColor(color) {
@@ -125,7 +125,7 @@ class ControllerGame {
                     theEvent = event;
                 }
                 this.legend.updateStateElement("buzzing", {
-                    id: theEvent,
+                    id: this.colorToHtmlColor(theEvent),
                     name: "",
                     color: this.colorToHtmlColor(theEvent),
                 });
@@ -141,9 +141,9 @@ class ControllerGame {
                 }
                 for (let player of state.players) {
                     //check also id there is a penality
-                    if (player.id == theEvent && player.penalityTime < Date.now()) {
+                    if (player.id == this.colorToHtmlColor(theEvent) && player.penalityTime < Date.now()) {
                         this.legend.updateStateElement("buzzing", {
-                            id: theEvent,
+                            id: this.colorToHtmlColor(theEvent),
                             name: player.name,
                             color: this.colorToHtmlColor(theEvent),
                         });
