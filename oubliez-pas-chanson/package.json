@@ -1,0 +1,14 @@
+{
+  "name": "oubliez-pas-chanson",
+  "version": "1.0.0",
+  "description": "Jeux koppelia - n'oubliez pas la chanson",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "legendary": "github:momo2555/legendary"
+  },
+  "author": "Mohamed AL Glawi",
+  "license": "ISC"
+}
