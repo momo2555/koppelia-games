@@ -1,0 +1,351 @@
+/* Background: #FFF0CE
+   Dark:       #0C356A
+   Yellow:     #FFC436
+   Blue:       #0174BE
+*/
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular.ttf);
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold-Italic.ttf);
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Italianno;
+    src: url(fonts/Italianno/Italianno-Regular.ttf);
+}
+
+@font-face {
+    font-family: JacquesFrancoisShadow;
+    src: url(fonts/JacquesFrancoisShadow/JacquesFrancoisShadow-Regular.ttf);
+}
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'Luciole', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #0C356A;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #FFF0CE;
+    margin: 0;
+    min-height: 100%;
+    width: 100wv;
+    height: 100hv;
+}
+
+
+.monitor-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#monitor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+#monitor #background-pres {
+
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+
+}
+
+#body-controller {
+    display: flex;
+}
+
+#controller {
+    margin: auto;
+}
+
+#controller p {
+    color: white;
+}
+
+#background-pres h1 {
+    font-size: 130px;
+    margin: auto;
+    color: white;
+    font-weight: 200;
+
+
+}
+
+.logo {
+    background-image: url("../images/logo.png");
+    width: 300px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* MONITOR HOME PAGE */
+
+#monitor-title {
+    position: absolute;
+    top: 20px;
+    left: 150px;
+}
+
+.title-top {
+    font-family: 'JacquesFrancoisShadow';
+    font-size: 70px;
+}
+
+.title-bottom {
+    font-family: 'Italianno';
+    color: #FFC436;
+    font-size: 120px;
+    position: relative;
+    top: -40px;
+    left: -10px;
+}
+
+.monitor-stage-hidden {
+    display: none;
+}
+
+#right-deco-bloc {
+    position: absolute;
+    right: -10%;
+    top: -10%;
+    height: 120%;
+    width: 25%;
+    background-color: #0174BE;
+    transform: rotate(15deg);
+
+}
+
+#middle-deco-bloc {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+    height: 70%;
+    width: 30%;
+    background-image: url("../images/tv-host.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#left-deco-bloc {
+    height: 400px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 500px;
+}
+
+.left-deco-strip {
+    height: 70px;
+    width: 300px;
+    background-color: #0174BE;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.left-deco-strip:first-child {
+    width: 400px;
+    background-color: #0C356A;
+}
+
+.left-deco-strip::after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 35px;
+    border-color: #0174BE;
+    border-style: solid;
+    position: relative;
+    left: 300px;
+    z-index: 99999;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+
+}
+
+.left-deco-strip:first-child::after {
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 35px;
+    border-color: #0C356A;
+    border-style: solid;
+    position: relative;
+    left: 400px;
+    z-index: 99999;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+
+
+/* MONITOR IDENTIFICATION */
+
+#monitor-identification {}
+
+#buzzer-and-hand {
+    height: 500px;
+    width: 400px;
+    background-repeat: no-repeat;
+    background-image: url("../images/buzzer-and-hand.png");
+    background-size: contain;
+}
+
+#monitor-identification-top {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 200px;
+}
+
+#identification-instruction {
+    flex: 1;
+    display: flex;
+    margin: auto;
+}
+
+#identification-instruction h2 {
+    text-align: center;
+    width: 100%;
+}
+
+#identification-player-info {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    margin-top: 50px;
+    height: 150px;
+    border: 3px solid #FFC436;
+    border-radius: 30px;
+}
+
+.selected-color {
+    display: none;
+    top: 0;
+    height: 0;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    z-index: -1;
+    background: rgb(255, 0, 221);
+    background: linear-gradient(180deg, rgba(255, 0, 221, 0.8057423653054971) 0%, rgba(0, 212, 255, 0) 100%);
+
+}
+
+/* MONITOR PLAYS LIST*/
+
+
+
+#monitor-plays {
+    overflow-y: scroll;
+    scrollbar-color: #FFC436 #FFF0CE;
+    scrollbar-width: 60px;
+}
+
+#monitor-plays-list {
+
+    margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#monitor .play-element-contain {
+    flex: 0 0 33.3%;
+    display: flex;
+}
+
+#monitor .play-element {
+    height: 420px;
+    width: 340px;
+    background-color: #FFC436;
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#monitor .play-element-photo {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 85%;
+    height: 60%;
+    margin: 7.5%;
+}
+
+#monitor .play-name {
+    display: flex;
+    height: 15%;
+    margin: 7.5%;
+}
+
+#monitor .play-name p {
+    margin: auto;
+    font-size: 30px;
+}
+
+/* MONITOR GAME */
+#monitor #game-top {
+    width: 100%;
+    height: 50%;
+    display: flex;
+}
+#monitor #question {
+    display: inline-block;
+    background-color: white;
+    padding: 60px;
+    border-radius: 20px;
+    margin: auto;
+}
+
+#monitor #question h2 {
+    margin: 0;
+}
+
+#monitor .response {}
+
+#monitor .response-left {}
+
+#monitor .response-right {}
