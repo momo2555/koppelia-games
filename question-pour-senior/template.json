@@ -1,0 +1,35 @@
+{
+    "description" : {
+        "type": "str"
+    },
+    "questions" : {
+        "type" : "list",
+        "label" : "Liste des questions",
+        "dictElementNameUse" : "question",
+        "maximum" : "none",
+        "data" : {
+            "type" : "dict",
+            "data" : {
+                "question" : {
+                    "label" : "Question",
+                    "type" : "str"
+                },
+                "choices" : {
+                    "type" : "list",
+                    "label" : "Liste des choix",
+                    "data" : {
+                        "type" : "str",
+                        "label" : "Nouveau choix",
+                        "minimum" : 2,
+                        "maximum" : 4
+                    }
+                },
+                "answer" : {
+                    "label" : "Réponse à la question",
+                    "type" : "str",
+                    "maximum" : 120
+                }
+            }
+        }
+    }
+}
