@@ -63,13 +63,17 @@ export class ControllerGame {
             }
 
         });
+
+        this.legend.onData((from, data) => {
+            console.log(data);
+        });
         
         this.buttonPlay.on("click", (e) => {
             this.legend.updateStateElement("stage", this.stages[1]);
         })
 
         this.buttonExplanations.on("click", (e) => {
-            
+            this.legend.getGamePlays("Wx1AfGAu4aeWJETS8iow");
         })
 
         this.buttonIdBloc.on("click", (e) => {
