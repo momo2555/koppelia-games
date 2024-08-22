@@ -19,9 +19,9 @@
                         Jouer
                     </p>
                 </div>
-                <div class="home-button" id="button-home">
+                <div class="home-button" id="button-explanations">
                     <p>
-                        Explication
+                        Explications
                     </p>
                 </div>
             </div>
@@ -184,10 +184,13 @@
     
     
     
-    <script src="lib/legend.js"></script>
-    <script src="scripts/game.controller.js"></script>
+    <script type="module" src="lib/legend.js"></script>
+    <script type="module" src="scripts/game.controller.js"></script>
     <script src="scripts/jquery.js"></script>
-    <script>
+    <script type="module">
+        import { Legend } from './lib/legend.js';
+        import { ControllerGame } from './scripts/game.controller.js';
+
         var legend = new Legend('controller');
         legend.onReady(() => {
             //start page script

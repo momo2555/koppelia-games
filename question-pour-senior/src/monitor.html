@@ -174,10 +174,13 @@
             
         </div>
         
-        <script src="lib/legend.js"></script>
-        <script src="scripts/game.monitor.js"></script>
+        <script type="module" src="lib/legend.js"></script>
+        <script type="module" src="scripts/game.monitor.js"></script>
         <script src="scripts/jquery.js"></script>
-        <script>
+        <script type="module" >
+            import { Legend } from './lib/legend.js';
+            import { MonitorGame } from './scripts/game.monitor.js';
+
             var legend = new Legend('monitor');
             legend.onReady(() => { 
                 //start page script

@@ -1,4 +1,4 @@
-class MonitorGame {
+export class MonitorGame {
     constructor(legend) {
         this.legend = legend;
         this.stages = ["home", "identification", "plays", "game"]

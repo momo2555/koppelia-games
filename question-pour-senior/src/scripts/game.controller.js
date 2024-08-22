@@ -1,23 +1,25 @@
 //@ts-check
 
 
-class ControllerGame {
+export class ControllerGame {
+
     /**
      * Constructor if ControllerGame
      * @param {import('legendary/extern/legend').Legend} legend
      */
+
     constructor(legend) {
         this.legend = legend;
         this.stages = ["home", "identification", "plays", "game"];
         this.currentStage = "";
 
         this.buttonPlay = $("#controller #button-play");
-        this.homeButton = $("#controller #button-home");
+        this.buttonExplanations = $("#controller #button-explanations");
+        this.buttonIdBloc = $("#controller #id-bottom-bloc");
 
         this.hideAllStages();
         this.initEvents();
         this.initializeGame();
-
 
     }
 
@@ -62,14 +64,19 @@ class ControllerGame {
 
         });
         
-        this.buttonPlay.on("click", function (e) {
+        this.buttonPlay.on("click", (e) => {
+            this.legend.updateStateElement("stage", this.stages[1]);
+        })
+
+        this.buttonExplanations.on("click", (e) => {
             
         })
 
-
+        this.buttonIdBloc.on("click", (e) => {
+            this.legend.updateStateElement("stage", this.stages[2]);
+        });
 
     }
-
 
 
 }
