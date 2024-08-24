@@ -1,10 +1,9 @@
 //@ts-check
 
-
 export class ControllerGame {
 
     /**
-     * Constructor if ControllerGame
+     * Constructor of ControllerGame
      * @param {import('legendary/extern/legend').Legend} legend
      */
 
@@ -73,7 +72,7 @@ export class ControllerGame {
         })
 
         this.buttonExplanations.on("click", (e) => {
-            this.legend.getGamePlays("Wx1AfGAu4aeWJETS8iow");
+            this.legend.getGamePlays();
         })
 
         this.buttonIdBloc.on("click", (e) => {
