@@ -612,6 +612,10 @@ body {
     margin-bottom: 15px;
 }
 
+#controller .play-element.selected {
+    border: 4px solid #0174BE;
+}
+
 #controller .play-element-photo {
     object-fit: cover;
     border-radius: 10px;
