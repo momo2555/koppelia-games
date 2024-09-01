@@ -18,6 +18,9 @@ export class ControllerGame {
         this.buttonExplanations = $("#controller #button-explanations");
         this.buttonIdBloc = $("#controller #id-bottom-bloc");
         this.buttonStartPlay = $("#plays-bottom-bloc");
+        this.buttonResponse = $("#controller .response");
+        this.buttonGameVerif = $("#controller #game-verif-button");
+        this.buttonGamePass = $("#controller #game-pass-button");
 
         this.playsListBloc = $("#controller #plays-page");
         this.playList = {};
@@ -58,7 +61,7 @@ export class ControllerGame {
             question: null,
             choices: [],
             answer: [],
-            selectedANswer: null,
+            selectedAnswer: null,
             buzzing: null,
         });
     }
@@ -75,8 +78,12 @@ export class ControllerGame {
         $('.play-element').removeClass("selected");
     }
 
+    deselectAllResponses() {
+        $(".response").removeClass("selected");
+    }
+
     initEvents() {
-        // State change
+        // State change event
         this.legend.onStateChange((from, state) => {
             if (this.currentStage != state["stage"]) {
                 this.currentStage = state["stage"];
@@ -92,18 +99,29 @@ export class ControllerGame {
                 if (state.question == null) {
                     this.chosQuestion();
                 } else {
+                    // if is there a question show it
                     this.showQuestion(state.question, state.choices, state.answer);
+                    this.showVerifOrPassButton(state.selectedAnswer);
+                    //deselect all responses if the selection gone
+                    if (state.selectedAnswer == null) this.deselectAllResponses();
                 }
             }
 
         });
 
+
+        // when receiving a new data (the list of plays)
         this.legend.onData((from, data) => {
             console.log(data);
             for (const playId in data.plays) {
                 this.legend.parseGamePlay(playId, data.plays[playId]).then(
                     (val) => {
+                        // add the play in the list
                         this.playList[playId] = val;
+                        // Send it to monitor (to show it)
+                        this.legend.sendToMonitor({
+                            play: val
+                        })
                         console.log(val);
                         let playEl = new PlayListElement(playId, val.play_name, val.play_image).getControllerElemeent();
                         this.playsListBloc.append(playEl.content);
@@ -118,13 +136,16 @@ export class ControllerGame {
             }
         });
 
+        // buttons EVENTS ===============================
+
+        // Start the game
         this.buttonPlay.on("click", (e) => {
             this.legend.updateStateElement("stage", this.stages[1]);
-        })
+        });
 
         this.buttonExplanations.on("click", (e) => {
 
-        })
+        });
 
         this.buttonIdBloc.on("click", (e) => {
             this.legend.updateStateElement("stage", this.stages[2]);
@@ -134,6 +155,27 @@ export class ControllerGame {
             let data = this.playList[this.selectedPLay].play_json;
             this.remainingQuestions = data.questions;
             this.legend.updateStateElement("stage", this.stages[3]);
+        });
+
+        // when click on an answer (on of 4 answers)
+        this.buttonResponse.on("click", (e) => {
+            this.deselectAllResponses();
+            $(e.target).addClass("selected");
+            this.legend.updateStateElement("selectedAnswer", $(e.target).children('p').first().text())
+        });
+
+        this.buttonGameVerif.on("click", (e) => {
+            // Send the response to be checked
+            this.legend.sendToMonitor({
+                action: "verif"
+            });
+
+        });
+
+        this.buttonGamePass.on("click", (e) => {
+            // Pass the question and go next question
+            this.requestNewQuestion();
+
         });
 
     }
@@ -151,6 +193,7 @@ export class ControllerGame {
         state.question = randomQuestion.question;
         state.choices = randomQuestion.choices;
         state.answer = randomQuestion.answer;
+        state.selectedAnswer = null;
 
         this.legend.setState(state);
     }
@@ -169,14 +212,34 @@ export class ControllerGame {
             $("#response-a"), $("#response-b"), $("#response-c"), $("#response-d"),
         ];
         let maxQuestions = Math.min(choices.length, choiceElements.length);
+
         $(".response").removeClass("right-response");
+
         for (let i = 0; i < maxQuestions; i++) {
             choiceElements[i].children("p").text(choices[i]);
             if (choices[i] == answer) {
                 choiceElements[i].addClass("right-response");
             }
         }
+    }
 
+    /**
+     * Firgure out what button to show 
+     * @param {string} selectedAnswer 
+     */
+    showVerifOrPassButton(selectedAnswer) {
+        if (selectedAnswer != null) {
+            this.buttonGameVerif.show();
+            this.buttonGamePass.hide();
+        } else {
+            this.buttonGameVerif.hide();
+            this.buttonGamePass.show();
+        }
+    }
+
+    requestNewQuestion() {
+        // to request a new question just set the question field of the state to null
+        this.legend.updateStateElement("question", null);
     }
 
 

@@ -459,6 +459,53 @@ body {
     color: #0C356A;
 }
 
+/* RESPONSE WRONG */
+#monitor .wrong-response {
+    background-color: #A81414;
+    color: white;
+}
+
+#monitor .wrong-response::before {
+    background-color: #A81414;
+    color: white;
+}
+
+#monitor .response-left.wrong-response::after {
+    border-left-color: #A81414;
+}
+
+#monitor .response-right.wrong-response::after {
+    border-right-color: #A81414;
+}
+
+#monitor .wrong-response p {
+    color: white;
+}
+
+
+/* RESPONSE RIGHT */
+#monitor .right-response {
+    background-color: #32a832;
+    color: white;
+}
+
+#monitor .right-response::before {
+    background-color: #32a832;
+    color: white;
+}
+
+#monitor .response-left.right-response::after {
+    border-left-color: #32a832;
+}
+
+#monitor .response-right.right-response::after {
+    border-right-color: #32a832;
+}
+
+#monitor .right-response p {
+    color: white;
+}
+
 
 
 
@@ -674,8 +721,12 @@ body {
 
 }
 
+#controller .response.selected {
+    border: 4px solid #FFC436;
+}
+
 #controller .right-response {
-    background-color: #FFC436;
+    background-color: #32a832;
 }
 
 #controller .right-response p {
@@ -721,7 +772,23 @@ body {
     height: 55px;
 }
 
+#controller #game-verif-button {
+    background-color: #0C356A;
+    position: absolute;
+    bottom: 90px;
+    width: 80%;
+    margin-left: 10%;
+    display: flex;
+    height: 55px;
+}
+
 #controller #game-pass-button p {
+    color: white;
+    margin: auto;
+    font-size: 25px;
+}
+
+#controller #game-verif-button p {
     color: white;
     margin: auto;
     font-size: 25px;
