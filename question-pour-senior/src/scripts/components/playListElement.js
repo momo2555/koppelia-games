@@ -13,12 +13,11 @@ export class PlayListElement {
      * @returns (Object)
      */
     getControllerElemeent() {
-        const imgUrl = URL.createObjectURL(this.playImage);
         const id = "play-el-" + this.playId;
         return {
             id: id, content: `
         <div class="play-element" id="${id}">
-            <img class="play-element-photo" src="${imgUrl}" />
+            <img class="play-element-photo" src="${this.playImage}" />
             <div Class="play-name">
                 <p>
                     ${this.playName}
@@ -30,13 +29,21 @@ export class PlayListElement {
 
     /**
      * 
-     * @param {Function} callback 
      * @returns 
      */
-    getMonitorElement(callback) {
-        const imgUrl = URL.createObjectURL(this.playImage);
+    getMonitorElement() {
         const id = "play-el-" + this.playId;
-        return `
-        `;
+        return {
+            id: id, content: `<div class="play-element-contain">
+                        <div class="play-element" id="${id}">
+                            <img class="play-element-photo" src="${this.playImage}" />
+                            <div Class="play-name">
+                                <p>
+                                    ${this.playName}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        `};
     }
 }

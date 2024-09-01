@@ -319,6 +319,14 @@ body {
     font-size: 30px;
 }
 
+#monitor .play-selected {
+    background-color: #0C356A;
+}
+
+#monitor .play-selected p{
+    color: white;
+}
+
 
 /* MONITOR GAME */
 

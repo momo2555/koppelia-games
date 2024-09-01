@@ -63,6 +63,7 @@ export class ControllerGame {
             answer: [],
             selectedAnswer: null,
             buzzing: null,
+            selectedPlay: null
         });
     }
 
@@ -89,7 +90,7 @@ export class ControllerGame {
                 this.currentStage = state["stage"];
                 this.hideAllStages();
                 this.showStage(this.currentStage);
-                // launch init functions 
+                // launch init functions (init plays list on stage of choosing the play)
                 if (this.currentStage == this.stages[2]) {
                     this.initPlayListStage();
                 }
@@ -116,6 +117,8 @@ export class ControllerGame {
             for (const playId in data.plays) {
                 this.legend.parseGamePlay(playId, data.plays[playId]).then(
                     (val) => {
+                        // add the id in the play json object
+                        val.play_id = playId;
                         // add the play in the list
                         this.playList[playId] = val;
                         // Send it to monitor (to show it)
@@ -129,6 +132,7 @@ export class ControllerGame {
                             this.deselectAllPlays();
                             $("#" + playEl.id).addClass("selected");
                             this.selectedPLay = playId;
+                            this.legend.updateStateElement("selectedPlay", playId);
                         });
                     }
                 )

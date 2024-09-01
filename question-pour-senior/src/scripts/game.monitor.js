@@ -1,3 +1,5 @@
+import { PlayListElement } from './components/playListElement.js';
+
 export class MonitorGame {
 
     /**
@@ -7,8 +9,12 @@ export class MonitorGame {
 
     constructor(legend) {
         this.legend = legend;
-        this.stages = ["home", "identification", "plays", "game"]
-        this.currentStage = ""
+        this.stages = ["home", "identification", "plays", "game"];
+        this.currentStage = "";
+
+        this.playsListBloc = $("#monitor #monitor-plays-list");
+        this.playList = {};
+
         this.hideAllStages();
         this.initEvents();
 
@@ -30,13 +36,39 @@ export class MonitorGame {
 
     }
 
+    initPlayListStage() {
+        // hide the play list
+        this.playsListBloc.html("");
+    }
+
+    deselectAllPlays() {
+        $("#monitor .play-element").removeClass("play-selected");
+    }
+
+    selectPlay(playId) {
+        $("#play-el-" + playId).addClass("play-selected");
+    }
+
     initEvents() {
         // State change
         this.legend.onStateChange((from, state) => {
             if (this.currentStage != state["stage"]) {
                 this.currentStage = state["stage"];
                 this.hideAllStages();
-                this.showStage(this.currentStage)
+                this.showStage(this.currentStage);
+                // launch init functions (init plays list on stage of choosing the play)
+                // check if it is the fisrt time is is the play stage
+                if (this.currentStage == this.stages[2]) {
+                    this.initPlayListStage();
+                }
+
+            }
+            // cHECK if it is play stage (different for the one before)
+            if (this.currentStage == this.stages[2]) {
+                this.deselectAllPlays();
+                    if (state.selectedPlay != null) {
+                        this.selectPlay(state.selectedPlay);
+                    } 
             }
             if (state.question != null) {
                 this.showQuestion(state.question, state.choices, state.selectedAnswer);
@@ -47,10 +79,23 @@ export class MonitorGame {
 
         this.legend.onData((from, data) => {
             if ('action' in data) {
+                // execute an action sent by controller
                 if (data.action == "verif") {
                     this.checkAnswer();
                 }
             }
+
+            if ('play' in data) {
+                console.log(data);
+                const play = data.play;
+                // add a play in the play list
+                this.playList[play.play_id] = play;
+                // Add it as an element 
+                let playEl = new PlayListElement(play.play_id, play.play_name, play.play_image).getMonitorElement();
+                this.playsListBloc.append(playEl.content);
+            }
+
+
         });
     }
 
