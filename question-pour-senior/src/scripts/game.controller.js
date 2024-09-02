@@ -28,6 +28,10 @@ export class ControllerGame {
 
         this.remainingQuestions = [];
 
+        // BUZZERS VARS SECTION
+        this.availableColors =[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
+        this.buzzerTab = {};
+
         this.hideAllStages();
         this.initEvents();
         this.initializeGame();
@@ -140,6 +144,49 @@ export class ControllerGame {
             }
         });
 
+        this.legend.onDeviceEvent((name, from, event) => {
+            console.log("new Device event = " + event + "; device address = " + from);
+            let state = this.legend.getState();
+            let buzzActivated = state.buzzing != null;
+            // if buzzing during identification
+            if(state.stage == this.stages[1] && !buzzActivated) {
+                let theEvent = "";
+                if(name=="mushroom") {
+                    this.addNewBuzzer(from);
+                    theEvent = this.getBuzzerColor(from);
+                } else {
+                    theEvent = event;
+                }
+                this.legend.updateStateElement("buzzing", {
+                    id: this.colorToHtmlColor(theEvent),
+                    name: "",
+                    color: this.colorToHtmlColor(theEvent),
+                });
+                this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))             
+            } 
+            
+            
+            /*else if (state.step == "play" && !buzzActivated) {
+                let theEvent = "";
+                if(name=="mushroom") {
+                    theEvent = this.getBuzzerColor(from);
+                } else {
+                    theEvent = event;
+                }
+                for (let player of state.players) {
+                    //check also id there is a penality
+                    if (player.id == this.colorToHtmlColor(theEvent) && player.penalityTime < Date.now()) {
+                        this.legend.updateStateElement("buzzing", {
+                            id: this.colorToHtmlColor(theEvent),
+                            name: player.name,
+                            color: this.colorToHtmlColor(theEvent),
+                        });
+                    }
+                }
+            } */
+
+        });
+
         // buttons EVENTS ===============================
 
         // Start the game
@@ -246,5 +293,31 @@ export class ControllerGame {
         this.legend.updateStateElement("question", null);
     }
 
+    /**
+     * BUZZER FUNCTIONS SECTION
+     */
+
+    addNewBuzzer(address) {
+        // check if the address exist
+        if (!Object.keys(this.buzzerTab).includes(address) && this.availableColors.length > 0) {
+            this.buzzerTab[address] = this.availableColors.pop();
+        }
+    }
+
+    colorToBuzzColor(color) {
+        return [
+            {type : "int", r : color[0]},
+            {type : "int", g : color[1]},
+            {type : "int", b : color[2]}
+        ]
+    }
+
+    colorToHtmlColor(color) {
+        return "rgb("+color[0]+", "+color[1]+", "+color[2]+")";
+    }
+
+    getBuzzerColor(address) {
+        return this.buzzerTab[address];
+    }
 
 }
