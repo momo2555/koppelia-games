@@ -21,6 +21,7 @@ export class ControllerGame {
         this.buttonResponse = $("#controller .response");
         this.buttonGameVerif = $("#controller #game-verif-button");
         this.buttonGamePass = $("#controller #game-pass-button");
+        this.buttonAddPlayer = $("#controller #id-player-add-player");
 
         this.playsListBloc = $("#controller #plays-page");
         this.playList = {};
@@ -29,7 +30,7 @@ export class ControllerGame {
         this.remainingQuestions = [];
 
         // BUZZERS VARS SECTION
-        this.availableColors =[[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
+        this.availableColors = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
         this.buzzerTab = {};
 
         this.hideAllStages();
@@ -99,6 +100,22 @@ export class ControllerGame {
                     this.initPlayListStage();
                 }
             }
+
+            // manage identification stage
+            if (state.stage == this.stages[1]) {
+                if (state.buzzing != null) {
+                    $("#id-add-player-bloc").show();
+                    $(".selected-color").show();
+                    $(".selected-color").css({
+                        background: "linear-gradient(180deg, " + state.buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
+                    });
+                } else {
+                    $("#id-add-player-bloc").hide();
+                    $(".selected-color").hide();
+                }
+            }
+
+            // manage game stage
             if (state.stage == this.stages[3]) {
                 // if there is no question, choose question
                 if (state.question == null) {
@@ -149,9 +166,9 @@ export class ControllerGame {
             let state = this.legend.getState();
             let buzzActivated = state.buzzing != null;
             // if buzzing during identification
-            if(state.stage == this.stages[1] && !buzzActivated) {
+            if (state.stage == this.stages[1] && !buzzActivated) {
                 let theEvent = "";
-                if(name=="mushroom") {
+                if (name == "mushroom") {
                     this.addNewBuzzer(from);
                     theEvent = this.getBuzzerColor(from);
                 } else {
@@ -162,10 +179,10 @@ export class ControllerGame {
                     name: "",
                     color: this.colorToHtmlColor(theEvent),
                 });
-                this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))             
-            } 
-            
-            
+                this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))
+            }
+
+
             /*else if (state.step == "play" && !buzzActivated) {
                 let theEvent = "";
                 if(name=="mushroom") {
@@ -227,6 +244,10 @@ export class ControllerGame {
             // Pass the question and go next question
             this.requestNewQuestion();
 
+        });
+
+        this.buttonAddPlayer.on("click", (e) => {
+            this.addNewPlayer();
         });
 
     }
@@ -306,18 +327,42 @@ export class ControllerGame {
 
     colorToBuzzColor(color) {
         return [
-            {type : "int", r : color[0]},
-            {type : "int", g : color[1]},
-            {type : "int", b : color[2]}
+            { type: "int", r: color[0] },
+            { type: "int", g: color[1] },
+            { type: "int", b: color[2] }
         ]
     }
 
     colorToHtmlColor(color) {
-        return "rgb("+color[0]+", "+color[1]+", "+color[2]+")";
+        return "rgb(" + color[0] + ", " + color[1] + ", " + color[2] + ")";
     }
 
     getBuzzerColor(address) {
         return this.buzzerTab[address];
     }
 
+    addNewPlayer() {
+        let name = $('#pid-player-name').val();
+        $('#player-name').val("");
+        let state = this.legend.getState();
+        let playerExist = false;
+        for (let player of state.players) {
+            if (player.id == state.buzzing.id) {
+                playerExist = true;
+                player.name = name;
+            }
+        }
+        if (!playerExist) {
+            state.players.push({
+                id: state.buzzing.id,
+                color: state.buzzing.color,
+                name: name,
+                penalityTime: 0,
+                score: 0,
+            });
+        }
+        state.buzzing = null;
+        this.legend.setState(state);
+    }
 }
+
