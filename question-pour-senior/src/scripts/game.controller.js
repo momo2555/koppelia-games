@@ -174,12 +174,15 @@ export class ControllerGame {
                 } else {
                     theEvent = event;
                 }
+                
                 this.legend.updateStateElement("buzzing", {
                     id: this.colorToHtmlColor(theEvent),
                     name: "",
                     color: this.colorToHtmlColor(theEvent),
                 });
+                
                 this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))
+                
             }
 
 
