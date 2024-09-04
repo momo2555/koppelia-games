@@ -104,14 +104,35 @@ export class ControllerGame {
             // manage identification stage
             if (state.stage == this.stages[1]) {
                 if (state.buzzing != null) {
+                    $('#id-list-players-bloc').hide();
                     $("#id-add-player-bloc").show();
                     $(".selected-color").show();
                     $(".selected-color").css({
                         background: "linear-gradient(180deg, " + state.buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
                     });
                 } else {
+                    $('#id-list-players-bloc').show();
                     $("#id-add-player-bloc").hide();
                     $(".selected-color").hide();
+                }
+
+                if (state.players.length > 0) {
+                    console.log(state.players);
+                    $("#id-bottom-bloc p").text("Continuer");
+                    // show the list of players in a list
+                    let listPlayers = "";
+                    for (let player of state.players) {
+                        listPlayers += `
+                            <div class="id-player-element" style="border-color: ${player.color};">
+                                <p style="color: ${player.color};">
+                                    ${player.name}
+                                </p>
+                            </div>
+                        `;
+                    }
+                    $("#id-list-players-bloc").html(listPlayers)
+                } else {
+                    $("#id-bottom-bloc p").text("Jouer sans joueurs");
                 }
             }
 
@@ -126,6 +147,21 @@ export class ControllerGame {
                     this.showVerifOrPassButton(state.selectedAnswer);
                     //deselect all responses if the selection gone
                     if (state.selectedAnswer == null) this.deselectAllResponses();
+                    // show the buzzing player if there is:
+                    if (state.buzzing != null) {
+                        $(".selected-color").show();
+                        $(".selected-color").css({
+                            background: "linear-gradient(180deg, " + state.buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
+                        });
+                        $("#game-buzzing-player").show();
+                        $("#game-buzzing-player p").css({
+                            color: state.buzzing.color,
+                        });
+                        $("#game-buzzing-player p").text(state.buzzing.name);
+                    } else {
+                        $(".selected-color").hide();
+                        $("#game-buzzing-player p").hide();
+                    }
                 }
             }
 
@@ -174,21 +210,21 @@ export class ControllerGame {
                 } else {
                     theEvent = event;
                 }
-                
+
                 this.legend.updateStateElement("buzzing", {
                     id: this.colorToHtmlColor(theEvent),
                     name: "",
                     color: this.colorToHtmlColor(theEvent),
                 });
-                
+
                 this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))
-                
+
             }
 
 
-            /*else if (state.step == "play" && !buzzActivated) {
+            else if (state.stage == this.stages[3] && !buzzActivated) {
                 let theEvent = "";
-                if(name=="mushroom") {
+                if (name == "mushroom") {
                     theEvent = this.getBuzzerColor(from);
                 } else {
                     theEvent = event;
@@ -203,7 +239,7 @@ export class ControllerGame {
                         });
                     }
                 }
-            } */
+            }
 
         });
 
@@ -345,8 +381,8 @@ export class ControllerGame {
     }
 
     addNewPlayer() {
-        let name = $('#pid-player-name').val();
-        $('#player-name').val("");
+        let name = $('#id-player-name').val();
+        $('#id-player-name').val("");
         let state = this.legend.getState();
         let playerExist = false;
         for (let player of state.players) {

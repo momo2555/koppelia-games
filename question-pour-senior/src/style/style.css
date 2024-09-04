@@ -620,7 +620,7 @@ body {
     background-color: #FFF0CE;
 }
 
-#controller .id-player-hiddern {
+#controller .id-player-hidden {
     display: none;
 }
 
@@ -660,6 +660,15 @@ body {
     font-size: 30px;
 }
 
+#controller .id-player-element {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    margin: 20px;
+}
+
+#controller .id-player-element p {
+    
+}
 
 
 /* CONTROLLER PLAYS LIST */

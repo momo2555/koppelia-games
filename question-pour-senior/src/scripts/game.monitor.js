@@ -107,9 +107,7 @@ export class MonitorGame {
             $("#response-a"), $("#response-b"), $("#response-c"), $("#response-d"),
         ];
         let maxQuestions = Math.min(choices.length, choiceElements.length);
-        $(".response").removeClass("response-selected");
-        $(".response").removeClass("right-response");
-        $(".response").removeClass("wrong-response");
+        
 
         // Manage play (questions and responses)
         for (let i = 0; i < maxQuestions; i++) {
@@ -129,6 +127,8 @@ export class MonitorGame {
             if (state.selectedAnswer == state.answer) {
                 // the chosen answer is right
                 $(".response-selected").addClass("right-response");
+                // cancel the player who is buzzing
+                this.cancelPlayerBuzzing();
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.requestNewQuestion();
@@ -136,6 +136,8 @@ export class MonitorGame {
             } else {
                 // the chosen answer is wrong
                 $(".response-selected").addClass("wrong-response");
+                // cancel the player who is buzzing
+                this.cancelPlayerBuzzing();
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.deselectResponse();
@@ -152,6 +154,13 @@ export class MonitorGame {
 
     deselectResponse() {
         this.legend.updateStateElement("selectedAnswer", null);
+        $(".response").removeClass("response-selected");
+        $(".response").removeClass("right-response");
+        $(".response").removeClass("wrong-response");
+    }
+
+    cancelPlayerBuzzing() {
+        this.legend.updateStateElement("buzzing", null);
     }
 
 
