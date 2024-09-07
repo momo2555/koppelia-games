@@ -63,12 +63,18 @@ export class MonitorGame {
                 }
 
             }
+            if (state.buzzing != null) {
+                this.showSlectedPlayer(state.buzzing);
+            } else {
+                this.hideSelectedPlayer();
+            }
+            
             // cHECK if it is play stage (different for the one before)
             if (this.currentStage == this.stages[2]) {
                 this.deselectAllPlays();
-                    if (state.selectedPlay != null) {
-                        this.selectPlay(state.selectedPlay);
-                    } 
+                if (state.selectedPlay != null) {
+                    this.selectPlay(state.selectedPlay);
+                }
             }
             if (state.question != null) {
                 this.showQuestion(state.question, state.choices, state.selectedAnswer);
@@ -107,8 +113,8 @@ export class MonitorGame {
             $("#response-a"), $("#response-b"), $("#response-c"), $("#response-d"),
         ];
         let maxQuestions = Math.min(choices.length, choiceElements.length);
-        
 
+        $(".response").removeClass("response-selected");
         // Manage play (questions and responses)
         for (let i = 0; i < maxQuestions; i++) {
             choiceElements[i].children("p").text(choices[i]);
@@ -123,7 +129,7 @@ export class MonitorGame {
 
     checkAnswer() {
         let state = this.legend.getState();
-        if(state.selectedAnswer != null) {
+        if (state.selectedAnswer != null) {
             if (state.selectedAnswer == state.answer) {
                 // the chosen answer is right
                 $(".response-selected").addClass("right-response");
@@ -143,7 +149,7 @@ export class MonitorGame {
                     this.deselectResponse();
                 }, 2000);
             }
-            
+
         }
     }
 
@@ -161,6 +167,21 @@ export class MonitorGame {
 
     cancelPlayerBuzzing() {
         this.legend.updateStateElement("buzzing", null);
+    }
+
+    showSlectedPlayer(buzzing) {
+        $(".selected-color").show();
+        $(".selected-color").css({
+            background: "linear-gradient(180deg, " + buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
+        });
+    }
+
+    showSlectedPlayerName(buzzing) {
+
+    }
+
+    hideSelectedPlayer() {
+        $(".selected-color").hide();
     }
 
 
