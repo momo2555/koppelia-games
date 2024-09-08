@@ -1,4 +1,5 @@
 import { PlayListElement } from './components/playListElement.js';
+import { AudioController } from './controllers/audioController.js';
 
 export class MonitorGame {
 
@@ -9,6 +10,7 @@ export class MonitorGame {
 
     constructor(legend) {
         this.legend = legend;
+        this.audio = new AudioController()
         this.stages = ["home", "identification", "plays", "game"];
         this.currentStage = "";
 
@@ -60,6 +62,9 @@ export class MonitorGame {
                 // check if it is the fisrt time is is the play stage
                 if (this.currentStage == this.stages[2]) {
                     this.initPlayListStage();
+                }
+                if (this.currentStage == this.stages[3]) {
+                    this.audio.playBackground();
                 }
 
             }
