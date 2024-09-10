@@ -16,6 +16,7 @@ export class MonitorGame {
 
         this.playsListBloc = $("#monitor #monitor-plays-list");
         this.playList = {};
+        this.buzzing = null;
 
         this.hideAllStages();
         this.initEvents();
@@ -70,10 +71,16 @@ export class MonitorGame {
             }
             if (state.buzzing != null) {
                 this.showSlectedPlayer(state.buzzing);
+                if (this.buzzing == null) {
+                    // make the sound once, not at each time the state is resent
+                    this.audio.playBuzz();
+                    this.audio.pauseBackground();
+                }
             } else {
                 this.hideSelectedPlayer();
             }
-            
+            this.buzzing = state.buzzing;
+
             // cHECK if it is play stage (different for the one before)
             if (this.currentStage == this.stages[2]) {
                 this.deselectAllPlays();
@@ -138,21 +145,28 @@ export class MonitorGame {
             if (state.selectedAnswer == state.answer) {
                 // the chosen answer is right
                 $(".response-selected").addClass("right-response");
+                this.audio.pauseBackground();
+                this.audio.playRight();
                 // cancel the player who is buzzing
                 this.cancelPlayerBuzzing();
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.requestNewQuestion();
-                }, 2000);
+                    this.deselectResponse();
+                    this.audio.playBackground();
+                }, 3000);
             } else {
                 // the chosen answer is wrong
                 $(".response-selected").addClass("wrong-response");
+                this.audio.pauseBackground();
+                this.audio.playWrong();
                 // cancel the player who is buzzing
                 this.cancelPlayerBuzzing();
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.deselectResponse();
-                }, 2000);
+                    this.audio.playBackground();
+                }, 3000);
             }
 
         }
