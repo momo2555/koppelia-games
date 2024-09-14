@@ -32,6 +32,7 @@ export class ControllerGame {
         // BUZZERS VARS SECTION
         this.availableColors = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
         this.buzzerTab = {};
+        this.question = "";
 
         this.hideAllStages();
         this.initEvents();
@@ -139,9 +140,21 @@ export class ControllerGame {
             // manage game stage
             if (state.stage == this.stages[3]) {
                 // if there is no question, choose question
+
                 if (state.question == null) {
-                    this.chosQuestion();
+                    if (this.question != null) {
+                        console.log("ACCESSSS")
+                        console.log(this.question, state.question)
+                        // update question, THis is a security : to avaoid choosing several time a question
+                        // It's like a mutex, but as we are in a monothread async env, I guess it's okay.
+                        this.question = state.question;
+                        this.chosQuestion();
+
+                    }
                 } else {
+                    // update question, THis is a security : to avaoid choosing several time a question
+                    // It's like a mutex, but as we are in a monothread async env, I guess it's okay.
+                    this.question = state.question;
                     // if is there a question show it
                     this.showQuestion(state.question, state.choices, state.answer);
                     this.showVerifOrPassButton(state.selectedAnswer);
@@ -163,6 +176,8 @@ export class ControllerGame {
                         $("#game-buzzing-player p").hide();
                     }
                 }
+                
+
             }
 
         });
