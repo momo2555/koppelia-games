@@ -322,7 +322,7 @@ body {
     background-color: #0C356A;
 }
 
-#monitor .play-selected p{
+#monitor .play-selected p {
     color: white;
 }
 
@@ -582,6 +582,65 @@ MONITOR PODIUM
 }
 
 
+/* SPECIAL */
+
+#monitor #special-top {
+    width: 100%;
+    height: 85%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#monitor #special-bottom {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+
+}
+
+#monitor #special-bottom p {
+    margin: auto;
+    background-color: #0C356A;
+    color: white;
+    padding: 10px 50px 10px 50px;
+    font-size: 50px;
+}
+
+#monitor .special-lyrics-bloc {
+    width: 100%;
+    flex: 1;
+    display: flex;
+}
+
+#monitor .special-lyrics-bloc p {
+    margin: auto;
+}
+
+#monitor .special-lyrics-back p {
+    color: #FFC436;
+    font-size: 30px;
+
+}
+
+#monitor .special-lyrics-current p {
+    color: #0C356A;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+#monitor .special-lyrics-comming p {
+    color: #0174BE;
+    font-size: 30px;
+}
+
+
 
 
 
@@ -669,13 +728,9 @@ MONITOR PODIUM
     display: flex;
 }
 
-#controller #id-bottom-bloc {
-    
-}
+#controller #id-bottom-bloc {}
 
-#controller #id-bottom-bloc p {
-    
-}
+#controller #id-bottom-bloc p {}
 
 
 
@@ -696,9 +751,7 @@ MONITOR PODIUM
     margin: 30px;
 }
 
-#controller #id-list-players-bloc {
-
-}
+#controller #id-list-players-bloc {}
 
 #controller #id-player-add-player {
     background-color: #FFC436;
@@ -734,9 +787,7 @@ MONITOR PODIUM
     margin: 20px;
 }
 
-#controller .id-player-element p {
-    
-}
+#controller .id-player-element p {}
 
 
 /* CONTROLLER PLAYS LIST */
@@ -755,9 +806,7 @@ MONITOR PODIUM
     flex: 1;
 }
 
-#controller #plays-bottom-bloc {
-    
-}
+#controller #plays-bottom-bloc {}
 
 #controller .play-element {
     height: 170px;
@@ -905,5 +954,3 @@ MONITOR PODIUM
     margin: auto;
     font-size: 25px;
 }
-
-

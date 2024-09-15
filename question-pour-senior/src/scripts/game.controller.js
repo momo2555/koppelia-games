@@ -11,7 +11,7 @@ export class ControllerGame {
 
     constructor(legend) {
         this.legend = legend;
-        this.stages = ["home", "identification", "plays", "game", "end-game"];
+        this.stages = ["home", "identification", "plays", "game", "end-game", "special"];
         this.currentStage = "";
 
         this.buttonPlay = $("#controller #button-play");
@@ -24,6 +24,10 @@ export class ControllerGame {
         this.buttonAddPlayer = $("#controller #id-player-add-player");
         this.buttonStopGame = $("#controller #game-bottom-bloc");
         this.buttonReturnHome = $("#controller #end-game-bottom-bloc");
+        this.buttonSpecial = $("#controller #go-special-button");
+        this.buttonStartSpecial = $("#controller #start-special-bottom-bloc");
+        this.buttonCheckSpecial = $("#controller #check-special-bottom-bloc")
+
 
         this.playsListBloc = $("#controller #plays-page");
         this.playList = {};
@@ -71,7 +75,8 @@ export class ControllerGame {
             answer: [],
             selectedAnswer: null,
             buzzing: null,
-            selectedPlay: null
+            selectedPlay: null,
+            special: null
         });
     }
 
@@ -239,7 +244,7 @@ export class ControllerGame {
             }
 
 
-            else if (state.stage == this.stages[3] && !buzzActivated) {
+            else if ((state.stage == this.stages[3] || (state.stage == this.stages[5] && state.special == true)) && !buzzActivated) {
                 let theEvent = "";
                 if (name == "mushroom") {
                     theEvent = this.getBuzzerColor(from);
@@ -312,6 +317,21 @@ export class ControllerGame {
 
         this.buttonReturnHome.on("click", (e) => {
             this.legend.updateStateElement("stage", this.stages[0]);
+        });
+
+        this.buttonSpecial.on("click", (e) => {
+            this.legend.updateStateElement("stage", this.stages[5]);
+        });
+
+        this.buttonStartSpecial.on("click", (e)=> {
+            this.legend.updateStateElement("special", true);
+
+        });
+
+        this.buttonCheckSpecial.on("click", (e) => {
+            this.legend.sendToMonitor({
+                checkSpecial: true
+            })
         });
 
     }
