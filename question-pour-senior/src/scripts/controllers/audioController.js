@@ -4,7 +4,12 @@ export class AudioController {
     constructor () {
         this.audio = {}
     }
-
+    playOutro() {
+        this.playMusic("thanks_koppelia.mp3");
+    }
+    pauseOutro() {
+        this.pauseMusic("thanks_koppelia.mp3");
+    }
     playBackground() {
         this.playMusic("background.mp3", true);
     }

@@ -514,6 +514,74 @@ body {
 }
 
 
+/**
+MONITOR PODIUM
+**/
+
+#monitor #end-game-bravo {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    font-size: 80px;
+    color: #0C356A;
+}
+
+#monitor .podium-bloc {
+    background-color: #0174BE;
+    position: absolute;
+    width: 25%;
+    bottom: 0;
+    display: flex;
+}
+
+#monitor .podium-bloc p {
+    margin: auto;
+    color: black;
+    font-size: 80px;
+
+}
+
+#monitor #first-podium {
+    height: 45%;
+    left: 37.5%
+}
+
+#monitor #second-podium {
+    height: 30%;
+    left: 6.25%;
+}
+
+#monitor #third-podium {
+    height: 15%;
+    right: 6.25%;
+}
+
+#monitor .podium-name {
+    position: absolute;
+}
+
+#monitor .podium-name p {
+    margin: 0;
+    color: #0C356A;
+    font-size: 50px
+}
+
+#monitor #first-podium-name {
+    bottom: 48%;
+    left: 37.5%;
+}
+
+#monitor #second-podium-name {
+    bottom: 33%;
+    left: 6.25%;
+}
+
+#monitor #third-podium-name {
+    bottom: 18%;
+    left: 68.75%;
+}
+
+
 
 
 

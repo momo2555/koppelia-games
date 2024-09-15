@@ -1,194 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style/style.css">
-        <title>Question pour un Sénior</title>
-    </head>
-    <body>
-       
-        <div id="monitor">
 
-            <div class="selected-color">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Question pour un Sénior</title>
+</head>
 
-            </div>
+<body>
 
-            <div class="monitor-stage monitor-stage-hidden" id="monitor-home">
-                <h1 id="monitor-title">
-                    <span class="title-top">Question pour un</span>  <br />
-                    <span class="title-bottom">Sénior</span>
-                </h1>
-                <div id="right-deco-bloc">
+    <div id="monitor">
 
-                </div>
-                <div id="middle-deco-bloc">
+        <div class="selected-color">
 
-                </div>
-                <div id="left-deco-bloc">
-                    <div class="left-deco-strip">
-
-                    </div>
-                    <div class="left-deco-strip">
-
-                    </div>
-                    <div class="left-deco-strip">
-
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="monitor-stage  monitor-stage-hidden" id="monitor-identification">
-                <div class="logo">
-
-                </div>
-                
-                
-                <div id="monitor-identification-top">
-                    <div id="identification-instruction">
-                        <h2>
-                            Apuyez sur votre champignon  <br />
-                            pour vous identifier.
-                        </h2>
-                    </div>
-                    <div id="buzzer-and-hand">
-
-                    </div>
-                    
-                </div>
-                <div id="identification-player-info">
-
-                </div>
-                
-                
-            </div>
-
-            <div class="monitor-stage monitor-stage-hidden" id="monitor-plays">
-                <div class="logo">
-
-                </div>
-                <div id="monitor-plays-list">
-                    
-                    <div class="play-element-contain">
-                        <div class="play-element">
-                            <img class="play-element-photo" src="images/sample-play.jpg" />
-                            <div Class="play-name">
-                                <p>
-                                    Les arbres
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="play-element-contain">
-                        <div class="play-element">
-                            <img class="play-element-photo" src="images/sample-play.jpg" />
-                            <div Class="play-name">
-                                <p>
-                                    Les arbres
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="play-element-contain">
-                        <div class="play-element">
-                            <img class="play-element-photo" src="images/sample-play.jpg" />
-                            <div Class="play-name">
-                                <p>
-                                    Les arbres
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    <div class="play-element-contain">
-                        <div class="play-element">
-                            <img class="play-element-photo" src="images/sample-play.jpg" />
-                            <div Class="play-name">
-                                <p>
-                                    Les arbres
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-                
-            </div>
-
-
-            <div class="monitor-stage" id="monitor-game">
-                <div class="logo">
-
-                </div>
-                <div id="game-top">
-                    <div id="question">
-                        <h2>
-                            Quel est l'arbre le plus haut du monde ?
-                        </h2>
-                    </div>
-                </div>
-                <div id="game-bottom">
-                    <div class="response response-left" id="response-a">
-                        <p>
-                            Segoia
-                        </p>
-                    </div>
-                    <div class="response response-left response-bottom" id="response-b">
-                        <p>
-                            Douglas
-                        </p>
-                    </div>
-                    <div class="response response-right" id="response-c">
-                        <p>
-                            Cheîne
-                        </p>
-                    </div>
-                    <div class="response response-right response-bottom" id="response-d">
-                        <p>
-                            Sapin
-                        </p>
-                    </div>
-                    <div class="buzzing-user">
-                        <p>
-                            Fabrice
-                        </p>
-
-                    </div>
-                </div>
-                
-
-
-            </div>
-
-            <div class="monitor-stage  monitor-stage-hidden" id="monitor-explaination">
-               
-                
-            </div>
-            
-            
         </div>
-        
-        <script type="module" src="lib/legend.js"></script>
-        <script type="module" src="scripts/game.monitor.js"></script>
-        <script type="module" src="scripts/components/playListElement.js"></script>
-        <script type="module" src="scripts/controllers/audioController.js"></script>
-        <script src="scripts/jquery.js"></script>
-        <script type="module" >
-            import { Legend } from './lib/legend.js';
-            import { MonitorGame } from './scripts/game.monitor.js';
 
-            var legend = new Legend('monitor');
-            legend.onReady(() => { 
-                //start page script
-                new MonitorGame(legend);
-            });
+        <div class="monitor-stage monitor-stage-hidden" id="monitor-home">
+            <h1 id="monitor-title">
+                <span class="title-top">Question pour un</span> <br />
+                <span class="title-bottom">Sénior</span>
+            </h1>
+            <div id="right-deco-bloc">
 
-        </script>
-    </body>
+            </div>
+            <div id="middle-deco-bloc">
+
+            </div>
+            <div id="left-deco-bloc">
+                <div class="left-deco-strip">
+
+                </div>
+                <div class="left-deco-strip">
+
+                </div>
+                <div class="left-deco-strip">
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="monitor-stage  monitor-stage-hidden" id="monitor-identification">
+            <div class="logo">
+
+            </div>
+
+
+            <div id="monitor-identification-top">
+                <div id="identification-instruction">
+                    <h2>
+                        Apuyez sur votre champignon <br />
+                        pour vous identifier.
+                    </h2>
+                </div>
+                <div id="buzzer-and-hand">
+
+                </div>
+
+            </div>
+            <div id="identification-player-info">
+
+            </div>
+
+
+        </div>
+
+        <div class="monitor-stage monitor-stage-hidden" id="monitor-plays">
+            <div class="logo">
+
+            </div>
+            <div id="monitor-plays-list">
+
+                <div class="play-element-contain">
+                    <div class="play-element">
+                        <img class="play-element-photo" src="images/sample-play.jpg" />
+                        <div Class="play-name">
+                            <p>
+                                Les arbres
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="play-element-contain">
+                    <div class="play-element">
+                        <img class="play-element-photo" src="images/sample-play.jpg" />
+                        <div Class="play-name">
+                            <p>
+                                Les arbres
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="play-element-contain">
+                    <div class="play-element">
+                        <img class="play-element-photo" src="images/sample-play.jpg" />
+                        <div Class="play-name">
+                            <p>
+                                Les arbres
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="play-element-contain">
+                    <div class="play-element">
+                        <img class="play-element-photo" src="images/sample-play.jpg" />
+                        <div Class="play-name">
+                            <p>
+                                Les arbres
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="monitor-stage" id="monitor-game">
+            <div class="logo">
+
+            </div>
+            <div id="game-top">
+                <div id="question">
+                    <h2>
+                        Quel est l'arbre le plus haut du monde ?
+                    </h2>
+                </div>
+            </div>
+            <div id="game-bottom">
+                <div class="response response-left" id="response-a">
+                    <p>
+                        Segoia
+                    </p>
+                </div>
+                <div class="response response-left response-bottom" id="response-b">
+                    <p>
+                        Douglas
+                    </p>
+                </div>
+                <div class="response response-right" id="response-c">
+                    <p>
+                        Cheîne
+                    </p>
+                </div>
+                <div class="response response-right response-bottom" id="response-d">
+                    <p>
+                        Sapin
+                    </p>
+                </div>
+                <div class="buzzing-user">
+                    <p>
+                        Fabrice
+                    </p>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="monitor-stage  monitor-stage-hidden" id="monitor-explaination">
+
+
+        </div>
+
+        <div class="monitor-stage monitor-stage-hidden" id="monitor-end-game">
+            <div class="logo">
+
+            </div>
+
+            <div id="end-game-bravo">
+                Bravo !!
+            </div>
+
+            <div id="podium">
+                <div class="podium-el-first podium-name" id="first-podium-name">
+                    <p>
+                        First
+                    </p>
+                </div>
+                <div class="podium-el-second podium-name" id="second-podium-name">
+                    <p>
+                        Second
+                    </p>
+                </div>
+                <div class="podium-el-third podium-name" id="third-podium-name">
+                    <p>
+                        Third
+                    </p>
+                </div>
+
+                <div class="podium-el-first podium-bloc" id="first-podium">
+                    <p>
+                        5
+                    </p>
+                </div>
+                <div class="podium-el-second podium-bloc" id="second-podium">
+                    <p>
+                        3
+                    </p>
+                </div>
+                <div class="podium-el-third podium-bloc" id="third-podium">
+                    <p>
+                        1
+                    </p>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <script type="module" src="lib/legend.js"></script>
+    <script type="module" src="scripts/game.monitor.js"></script>
+    <script type="module" src="scripts/components/playListElement.js"></script>
+    <script type="module" src="scripts/controllers/audioController.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script type="module">
+        import { Legend } from './lib/legend.js';
+        import { MonitorGame } from './scripts/game.monitor.js';
+
+        var legend = new Legend('monitor');
+        legend.onReady(() => {
+            //start page script
+            new MonitorGame(legend);
+        });
+
+    </script>
+</body>
+
 </html>

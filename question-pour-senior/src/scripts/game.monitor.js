@@ -11,7 +11,7 @@ export class MonitorGame {
     constructor(legend) {
         this.legend = legend;
         this.audio = new AudioController()
-        this.stages = ["home", "identification", "plays", "game"];
+        this.stages = ["home", "identification", "plays", "game", "end-game"];
         this.currentStage = "";
 
         this.playsListBloc = $("#monitor #monitor-plays-list");
@@ -66,6 +66,15 @@ export class MonitorGame {
                 }
                 if (this.currentStage == this.stages[3]) {
                     this.audio.playBackground();
+                }
+                if (this.currentStage == this.stages[4]) {
+                    this.audio.pauseBackground();
+                    this.audio.playOutro();
+                    this.showEndGame(state);
+                }
+                if (this.currentStage == this.stages[0]) {
+                    this.audio.pauseBackground();
+                    this.audio.pauseOutro();
                 }
 
             }
@@ -148,7 +157,7 @@ export class MonitorGame {
                 this.audio.pauseBackground();
                 this.audio.playRight();
                 // cancel the player who is buzzing
-                this.cancelPlayerBuzzing();
+                this.cancelPlayerBuzzing(true);
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.requestNewQuestion();
@@ -161,7 +170,7 @@ export class MonitorGame {
                 this.audio.pauseBackground();
                 this.audio.playWrong();
                 // cancel the player who is buzzing
-                this.cancelPlayerBuzzing();
+                this.cancelPlayerBuzzing(false);
                 // show the result for two seconds
                 window.setTimeout(() => {
                     this.deselectResponse();
@@ -170,6 +179,54 @@ export class MonitorGame {
             }
 
         }
+    }
+
+    showEndGame(state) {
+        let podium = $("#monitor #podium");
+
+        if (state.players.length > 0) {
+            podium.show();
+            // class the playersfor
+            state.players.sort((a, b) => {
+                return b.score - a.score;
+            });
+            $(".podium-el-first").hide();
+            $(".podium-el-second").hide();
+            $(".podium-el-third").hide();
+
+            let to = state.players.length >= 3 ? 3 : state.players.length;
+            for (let i = 0; i < to; i++) {
+                let player = state.players[i];
+                if (i == 0) {
+                    $(".podium-el-first").show();
+                    $("#first-podium-name p").text(player.name);
+                    $("#first-podium p").text(player.score);
+                    $("#first-podium").css({
+                        "background-color" : player.color
+                    });
+                } else if (i == 1) {
+                    $(".podium-el-second").show();
+                    $("#second-podium-name p").text(player.name);
+                    $("#second-podium p").text(player.score);
+                    $("#second-podium").css({
+                        "background-color" : player.color
+                    });
+                } else if (i == 2) {
+                    $(".podium-el-third").show();
+                    $("#third-podium-name p").text(player.name);
+                    $("#third-podium p").text(player.score);
+                    $("#third-podium").css({
+                        "background-color" : player.color
+                    });
+                }
+            }
+             
+        } else {
+            podium.hide();
+        }
+
+
+
     }
 
     requestNewQuestion() {
@@ -184,8 +241,28 @@ export class MonitorGame {
         $(".response").removeClass("wrong-response");
     }
 
-    cancelPlayerBuzzing() {
-        this.legend.updateStateElement("buzzing", null);
+    cancelPlayerBuzzing(is_right) {
+        let state = this.legend.getState();
+
+        if (is_right)
+            state = this.AddUserScore(state);
+
+        // Cancel de Buzz
+        state.buzzing = null
+        this.legend.setState(state);
+        console.log("Cancel buzz", state.players);
+    }
+
+    AddUserScore(state) {
+        if (state.players.length > 0 && state.buzzing != null) {
+            // If there are players playing
+            for (let player of state.players) {
+                if (player.id == state.buzzing.id) {
+                    player.score += 1;
+                }
+            }
+        }
+        return state;
     }
 
     showSlectedPlayer(buzzing) {

@@ -11,7 +11,7 @@ export class ControllerGame {
 
     constructor(legend) {
         this.legend = legend;
-        this.stages = ["home", "identification", "plays", "game"];
+        this.stages = ["home", "identification", "plays", "game", "end-game"];
         this.currentStage = "";
 
         this.buttonPlay = $("#controller #button-play");
@@ -22,6 +22,8 @@ export class ControllerGame {
         this.buttonGameVerif = $("#controller #game-verif-button");
         this.buttonGamePass = $("#controller #game-pass-button");
         this.buttonAddPlayer = $("#controller #id-player-add-player");
+        this.buttonStopGame = $("#controller #game-bottom-bloc");
+        this.buttonReturnHome = $("#controller #end-game-bottom-bloc");
 
         this.playsListBloc = $("#controller #plays-page");
         this.playList = {};
@@ -176,7 +178,7 @@ export class ControllerGame {
                         $("#game-buzzing-player p").hide();
                     }
                 }
-                
+
 
             }
 
@@ -304,24 +306,39 @@ export class ControllerGame {
             this.addNewPlayer();
         });
 
+        this.buttonStopGame .on("click", (e) => {
+            this.updateStageToEnd();
+        });
+
+        this.buttonReturnHome.on("click", (e) => {
+            this.legend.updateStateElement("stage", this.stages[0]);
+        });
+
     }
 
     chosQuestion() {
-        // take a random question from remaining questions
-        const randomIndex = Math.floor(Math.random() * this.remainingQuestions.length);
-        const randomQuestion = this.remainingQuestions[randomIndex];
+        if (this.remainingQuestions.length > 0) {
+            // take a random question from remaining questions
+            const randomIndex = Math.floor(Math.random() * this.remainingQuestions.length);
+            const randomQuestion = this.remainingQuestions[randomIndex];
 
-        // Remove the question from remaining questions
-        this.remainingQuestions.splice(randomIndex, 1);
+            // Remove the question from remaining questions
+            this.remainingQuestions.splice(randomIndex, 1);
+            console.log(this.remainingQuestions.length);
 
-        // Update the state:
-        let state = this.legend.getState();
-        state.question = randomQuestion.question;
-        state.choices = randomQuestion.choices;
-        state.answer = randomQuestion.answer;
-        state.selectedAnswer = null;
+            // Update the state:
+            let state = this.legend.getState();
+            state.question = randomQuestion.question;
+            state.choices = randomQuestion.choices;
+            state.answer = randomQuestion.answer;
+            state.selectedAnswer = null;
 
-        this.legend.setState(state);
+            this.legend.setState(state);
+        } else {
+            // there is no question left : this is the end of the game
+            this.updateStageToEnd();
+
+        }
     }
 
     /**
@@ -417,6 +434,10 @@ export class ControllerGame {
         }
         state.buzzing = null;
         this.legend.setState(state);
+    }
+
+    updateStageToEnd() {
+        this.legend.updateStateElement("stage", this.stages[4]);
     }
 }
 
