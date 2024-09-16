@@ -82,7 +82,8 @@ export class ControllerGame {
             buzzing: null,
             selectedPlay: null,
             special: null,
-            entryPlayerName: ""
+            entryPlayerName: "",
+            noBuzzTime: false,
         });
     }
 
@@ -256,7 +257,7 @@ export class ControllerGame {
             }
 
 
-            else if ((state.stage == this.stages[3] || (state.stage == this.stages[5] && state.special == true)) && !buzzActivated) {
+            else if ((state.stage == this.stages[3] || (state.stage == this.stages[5] && state.special == true)) && !buzzActivated && !state.noBuzzTime) {
                 let theEvent = "";
                 if (name == "mushroom") {
                     theEvent = this.getBuzzerColor(from);
@@ -271,6 +272,7 @@ export class ControllerGame {
                             name: player.name,
                             color: this.colorToHtmlColor(theEvent),
                         });
+                        this.legend.sendDeviceData(from, this.colorToBuzzColor(theEvent))
                     }
                 }
             }

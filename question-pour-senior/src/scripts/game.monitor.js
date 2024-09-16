@@ -20,8 +20,13 @@ export class MonitorGame {
 
         this.special = null;
 
+        // temporary :( 
+        this.specialBuzzed = false;
+
         this.hideAllStages();
         this.initEvents();
+
+        this.penalityTime = 3000;
 
 
     }
@@ -122,12 +127,13 @@ export class MonitorGame {
                 }
                 this.special = state.special;
                 // 
-                if (state.buzzing != null) {
+                if (state.buzzing != null && !this.specialBuzzed) {
                     $("#special-bottom p").css(
                         {
                             "background-color": state.buzzing.color,
                         }
                     );
+                    this.specialBuzzed = true;
                 }
             }
 
@@ -195,8 +201,7 @@ export class MonitorGame {
                 this.cancelPlayerBuzzing(true);
                 // show the result for two seconds
                 window.setTimeout(() => {
-                    this.requestNewQuestion();
-                    this.deselectResponse();
+                    this.deselectResponse(true);
                     this.audio.playBackground();
                 }, 3000);
             } else {
@@ -208,9 +213,9 @@ export class MonitorGame {
                 this.cancelPlayerBuzzing(false);
                 // show the result for two seconds
                 window.setTimeout(() => {
-                    this.deselectResponse();
+                    this.deselectResponse(false);
                     this.audio.playBackground();
-                }, 3000);
+                }, 1500);
             }
 
         }
@@ -359,25 +364,27 @@ export class MonitorGame {
     }
 
     incrementSpecialAnswer() {
+
         let state = this.legend.getState();
-        let answerDOM = $("#special-bottom p");
-
-        for (let answer of this.specialAnswers) {
-            if (answer.id == this.specialAnswerIndex) {
-                this.specialSelectedAnswer = answer;
-            }
-        }
-        this.specialAnswerIndex++;
-
-        // show the answer
-        if (this.specialSelectedAnswer == null) {
-            answerDOM.hide();
-        } else {
-            answerDOM.show();
-            answerDOM.text(this.specialSelectedAnswer.answer)
-        }
-
         if (state.buzzing == null) {
+            let answerDOM = $("#special-bottom p");
+
+            for (let answer of this.specialAnswers) {
+                if (answer.id == this.specialAnswerIndex) {
+                    this.specialSelectedAnswer = answer;
+                }
+            }
+            this.specialAnswerIndex++;
+
+            // show the answer
+            if (this.specialSelectedAnswer == null) {
+                answerDOM.hide();
+            } else {
+                answerDOM.show();
+                answerDOM.text(this.specialSelectedAnswer.answer)
+            }
+
+
             window.setTimeout(() => {
                 this.incrementSpecialAnswer();
             }, 12000);
@@ -404,6 +411,7 @@ export class MonitorGame {
                         }
                     }
                 }
+                state.buzzing = null;
                 this.legend.setState(state);
             } else {
                 $("#special-bottom p").css(
@@ -415,7 +423,10 @@ export class MonitorGame {
             }
 
             window.setTimeout(() => {
-                this.legend.updateStateElement("stage", this.stages[4]);
+                this.legend.updateState({
+                    stage: this.stages[4],
+                    buzzing: null,
+                });
 
             }, 4000);
         }
@@ -427,31 +438,44 @@ export class MonitorGame {
         this.legend.updateStateElement("question", null);
     }
 
-    deselectResponse() {
-        this.legend.updateStateElement("selectedAnswer", null);
+    deselectResponse(requestNewQuestion = false) {
+        let update = {};
+        if (requestNewQuestion)
+            update.question = null;
+        update.selectedAnswer = null;
+        update.noBuzzTime = false;
+        this.legend.updateState(update);
         $(".response").removeClass("response-selected");
         $(".response").removeClass("right-response");
         $(".response").removeClass("wrong-response");
     }
 
-    cancelPlayerBuzzing(is_right) {
+    cancelPlayerBuzzing(isRight) {
         let state = this.legend.getState();
 
-        if (is_right)
-            state = this.AddUserScore(state);
+
+        state = this.AddUserScore(state, isRight);
+
+
 
         // Cancel de Buzz
         state.buzzing = null
+        state.noBuzzTime = true;
         this.legend.setState(state);
         console.log("Cancel buzz", state.players);
     }
 
-    AddUserScore(state) {
+    AddUserScore(state, isRight) {
         if (state.players.length > 0 && state.buzzing != null) {
             // If there are players playing
             for (let player of state.players) {
                 if (player.id == state.buzzing.id) {
-                    player.score += 1;
+                    if (isRight)
+                        // ADD SCORE 
+                        player.score += 1;
+                    else
+                        // ADD PENALITY
+                        player.penalityTime = Date.now() + this.penalityTime;
                 }
             }
         }
