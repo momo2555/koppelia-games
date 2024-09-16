@@ -400,7 +400,7 @@ export class MonitorGame {
                 if (state.players.length > 0) {
                     for (let player of state.players) {
                         if (player.id == state.buzzing.id) {
-                            player.score+=2;
+                            player.score += 2;
                         }
                     }
                 }
@@ -463,6 +463,20 @@ export class MonitorGame {
         $(".selected-color").css({
             background: "linear-gradient(180deg, " + buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
         });
+        $("#identification-player-info p").show();
+        $("#identification-player-info p").css({
+            "color": buzzing.color
+        });
+        $("#identification-player-info").css({
+            "border-color": buzzing.color,
+        });
+        let state = this.legend.getState();
+        $("#identification-player-info p").text(state.entryPlayerName);
+        $(".buzzing-user p").show();
+        $(".buzzing-user p").text(buzzing.name);
+        $(".buzzing-user p").css({
+            "color": buzzing.color,
+        });
     }
 
     showSlectedPlayerName(buzzing) {
@@ -471,6 +485,11 @@ export class MonitorGame {
 
     hideSelectedPlayer() {
         $(".selected-color").hide();
+        $("#identification-player-info").css({
+            "border-color": "#FFC436"
+        });
+        $("#identification-player-info p").hide();
+        $(".buzzing-user p").hide();
     }
 
 

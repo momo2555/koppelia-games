@@ -14,6 +14,7 @@ export class ControllerGame {
         this.stages = ["home", "identification", "plays", "game", "end-game", "special"];
         this.currentStage = "";
 
+        // buttons
         this.buttonPlay = $("#controller #button-play");
         this.buttonExplanations = $("#controller #button-explanations");
         this.buttonIdBloc = $("#controller #id-bottom-bloc");
@@ -26,7 +27,11 @@ export class ControllerGame {
         this.buttonReturnHome = $("#controller #end-game-bottom-bloc");
         this.buttonSpecial = $("#controller #go-special-button");
         this.buttonStartSpecial = $("#controller #start-special-bottom-bloc");
-        this.buttonCheckSpecial = $("#controller #check-special-bottom-bloc")
+        this.buttonCheckSpecial = $("#controller #check-special-bottom-bloc");
+
+
+        // entries
+        this.entryPlayerName = $("#controller #id-player-name")
 
 
         this.playsListBloc = $("#controller #plays-page");
@@ -36,7 +41,7 @@ export class ControllerGame {
         this.remainingQuestions = [];
 
         // BUZZERS VARS SECTION
-        this.availableColors = [[255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 255, 0], [255, 0, 255]];
+        this.availableColors = [[255, 255, 0], [255, 0, 0], [0, 255, 0], [0, 0, 255], [255, 0, 255]];
         this.buzzerTab = {};
         this.question = "";
 
@@ -76,7 +81,8 @@ export class ControllerGame {
             selectedAnswer: null,
             buzzing: null,
             selectedPlay: null,
-            special: null
+            special: null,
+            entryPlayerName: ""
         });
     }
 
@@ -118,10 +124,16 @@ export class ControllerGame {
                     $(".selected-color").css({
                         background: "linear-gradient(180deg, " + state.buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
                     });
+                    $('#id-players').css({
+                        "border-color": state.buzzing.color,
+                    });
                 } else {
                     $('#id-list-players-bloc').show();
                     $("#id-add-player-bloc").hide();
                     $(".selected-color").hide();
+                    $('#id-players').css({
+                        "border-color": "#FFC436",
+                    });
                 }
 
                 if (state.players.length > 0) {
@@ -332,6 +344,10 @@ export class ControllerGame {
             this.legend.sendToMonitor({
                 checkSpecial: true
             })
+        });
+
+        this.entryPlayerName.on('input', (e) => {
+            this.legend.updateStateElement("entryPlayerName", this.entryPlayerName.val());
         });
 
     }
