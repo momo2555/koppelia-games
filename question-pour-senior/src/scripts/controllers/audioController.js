@@ -5,10 +5,10 @@ export class AudioController {
         this.audio = {}
     }
     playOutro() {
-        this.playMusic("thanks_koppelia.mp3");
+        this.playMusic("ending.mp3");
     }
     pauseOutro() {
-        this.pauseMusic("thanks_koppelia.mp3");
+        this.pauseMusic("ending.mp3");
     }
     playBackground() {
         this.playMusic("background.mp3", true);
