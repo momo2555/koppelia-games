@@ -9,3 +9,8 @@ http://localhost:2227/game/monitor.html
 ```
 htto://localhost:2227/game/controller.html
 ```
+
+## Update legendary library
+```
+npm i legendary --force
+```
