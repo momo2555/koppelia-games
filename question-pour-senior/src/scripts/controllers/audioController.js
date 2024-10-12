@@ -30,14 +30,6 @@ export class AudioController {
         this.playMusic("applause.mp3");
     }
 
-    playSpecial() {
-        this.playMusic("lelacduconnemera.mp3");
-    }
-
-    pauseSpecial() {
-        this.pauseMusic("lelacduconnemera.mp3");
-    }
-
     /**
      * 
      * @param {string} music 

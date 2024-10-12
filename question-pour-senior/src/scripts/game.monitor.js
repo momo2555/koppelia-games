@@ -11,17 +11,12 @@ export class MonitorGame {
     constructor(legend) {
         this.legend = legend;
         this.audio = new AudioController()
-        this.stages = ["home", "identification", "plays", "game", "end-game", "special"];
+        this.stages = ["home", "identification", "plays", "game", "end-game", "explanation"];
         this.currentStage = "";
 
         this.playsListBloc = $("#monitor #monitor-plays-list");
         this.playList = {};
         this.buzzing = null;
-
-        this.special = null;
-
-        // temporary :( 
-        this.specialBuzzed = false;
 
         this.hideAllStages();
         this.initEvents();
@@ -85,12 +80,6 @@ export class MonitorGame {
                     this.audio.pauseBackground();
                     this.audio.pauseOutro();
                 }
-                if (this.currentStage == this.stages[5]) {
-                    this.audio.pauseBackground();
-                    this.audio.pauseOutro();
-                }
-
-
             }
             if (state.buzzing != null) {
                 this.showSlectedPlayer(state.buzzing);
@@ -117,27 +106,6 @@ export class MonitorGame {
 
             }
 
-            if (this.currentStage == this.stages[5]) {
-                if (state.special != null && state.special != this.special) {
-                    if (state.special == true) {
-                        // start the special
-                        this.showSpecial(state);
-
-                    }
-                }
-                this.special = state.special;
-                // 
-                if (state.buzzing != null && !this.specialBuzzed) {
-                    $("#special-bottom p").css(
-                        {
-                            "background-color": state.buzzing.color,
-                        }
-                    );
-                    this.specialBuzzed = true;
-                }
-            }
-
-
 
         });
 
@@ -158,15 +126,6 @@ export class MonitorGame {
                 let playEl = new PlayListElement(play.play_id, play.play_name, play.play_image).getMonitorElement();
                 this.playsListBloc.append(playEl.content);
             }
-
-            if ('checkSpecial' in data) {
-                // execute an action sent by controller
-                if (data.checkSpecial == true) {
-                    this.checkSpecialAnswer();
-                }
-            }
-
-
         });
     }
 
@@ -266,170 +225,6 @@ export class MonitorGame {
         }
 
 
-
-    }
-
-    showSpecial(state) {
-        // parse the lyrics 
-        const filePath = '/game/content/lyrics.txt';
-
-        // Using the fetch API to read the file
-        fetch(filePath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();  // Convert the response to text
-            })
-            .then(text => {
-                // parse the lyrics
-                this.lyrics = [];
-                this.goodAnswer = "Michel Sardou";
-                this.specialAnswers = [
-                    {
-                        answer: "Charles Aznavour",
-                        id: 3,
-                    },
-                    {
-                        answer: "Jean-Jacques Goldman",
-                        id: 4,
-                    },
-                    {
-                        answer: "Florent Pagny",
-                        id: 5,
-                    },
-                    {
-                        answer: "Michel Sardou",
-                        id: 6,
-                    },
-                ]
-                this.specialSelectedAnswer = null;
-                this.specialAnswerIndex = 1;
-
-
-
-                const lines = text.split('\n');
-                for (let line of lines) {
-                    let data = line.split(' - ');
-                    let lyric = data[1];
-                    let timeData = data[0].split(":");
-                    let time = parseInt(timeData[0]) * 60 + parseInt(timeData[1]);
-                    this.lyrics.push({
-                        lyric: lyric,
-                        time: time
-                    });
-                }
-                console.log(this.lyrics);
-                this.shownLyrics = [null, null, this.lyrics[0], this.lyrics[1], this.lyrics[2]];
-                this.lyricIndex = 2;
-                this.audio.playSpecial();
-                let startTime = Math.floor(Date.now() / 1000);
-                this.incrementLyrics();
-                this.incrementSpecialAnswer();
-
-
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
-
-
-
-    }
-
-    incrementLyrics() {
-        // first show the lyrics
-        let state = this.legend.getState();
-        let lyricsDOM = [
-            $("#lyric-1 p"), $("#lyric-2 p"), $("#lyric-3 p"), $("#lyric-4 p"), $("#lyric-5 p")
-        ]
-        for (let i = 0; i < this.shownLyrics.length; i++) {
-            if (this.shownLyrics[i] != null) {
-                lyricsDOM[i].text(this.shownLyrics[i].lyric);
-            } else {
-                lyricsDOM[i].text("");
-            }
-
-        }
-        // Add the next lyric
-        this.shownLyrics.shift();
-        this.lyricIndex++;
-        this.shownLyrics.push(this.lyrics[this.lyricIndex]);
-        if (state.buzzing == null) {
-            window.setTimeout(() => {
-                this.incrementLyrics();
-            }, (this.shownLyrics[2].time - this.shownLyrics[1].time) * 1000);
-        }
-
-    }
-
-    incrementSpecialAnswer() {
-
-        let state = this.legend.getState();
-        if (state.buzzing == null) {
-            let answerDOM = $("#special-bottom p");
-
-            for (let answer of this.specialAnswers) {
-                if (answer.id == this.specialAnswerIndex) {
-                    this.specialSelectedAnswer = answer;
-                }
-            }
-            this.specialAnswerIndex++;
-
-            // show the answer
-            if (this.specialSelectedAnswer == null) {
-                answerDOM.hide();
-            } else {
-                answerDOM.show();
-                answerDOM.text(this.specialSelectedAnswer.answer)
-            }
-
-
-            window.setTimeout(() => {
-                this.incrementSpecialAnswer();
-            }, 12000);
-        }
-
-
-    }
-
-    checkSpecialAnswer() {
-        if (this.specialAnswers != null) {
-            let state = this.legend.getState();
-            this.audio.pauseSpecial();
-            if (this.specialSelectedAnswer.answer == this.goodAnswer) {
-                $("#special-bottom p").css(
-                    {
-                        "background-color": "green",
-                    }
-                );
-                this.audio.playRight();
-                if (state.players.length > 0) {
-                    for (let player of state.players) {
-                        if (player.id == state.buzzing.id) {
-                            player.score += 2;
-                        }
-                    }
-                }
-                state.buzzing = null;
-                this.legend.setState(state);
-            } else {
-                $("#special-bottom p").css(
-                    {
-                        "background-color": "red",
-                    }
-                );
-                this.audio.playWrong();
-            }
-
-            window.setTimeout(() => {
-                this.legend.updateState({
-                    stage: this.stages[4],
-                    buzzing: null,
-                });
-
-            }, 4000);
-        }
 
     }
 
