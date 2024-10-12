@@ -228,15 +228,11 @@ export class MonitorGame {
 
     }
 
-    requestNewQuestion() {
-        // to request a new question just set the question field of the state to null
-        this.legend.updateStateElement("question", null);
-    }
 
     deselectResponse(requestNewQuestion = false) {
         let update = {};
         if (requestNewQuestion)
-            update.question = null;
+            update.stage = "explanation";
         update.selectedAnswer = null;
         update.noBuzzTime = false;
         this.legend.updateState(update);
@@ -248,11 +244,7 @@ export class MonitorGame {
     cancelPlayerBuzzing(isRight) {
         let state = this.legend.getState();
 
-
         state = this.AddUserScore(state, isRight);
-
-
-
         // Cancel de Buzz
         state.buzzing = null
         state.noBuzzTime = true;

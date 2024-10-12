@@ -25,6 +25,7 @@ export class ControllerGame {
         this.buttonAddPlayer = $("#controller #id-player-add-player");
         this.buttonStopGame = $("#controller #game-bottom-bloc");
         this.buttonReturnHome = $("#controller #end-game-bottom-bloc");
+        this.buttonExplanationNext = $("#controller #explanation-next-button");
 
         // entries
         this.entryPlayerName = $("#controller #id-player-name")
@@ -330,6 +331,13 @@ export class ControllerGame {
 
         this.entryPlayerName.on('input', (e) => {
             this.legend.updateStateElement("entryPlayerName", this.entryPlayerName.val());
+        });
+
+        this.buttonExplanationNext.on("click", (e) => {
+            this.legend.updateState({
+                stage: "game",
+                question: null
+            });
         });
 
     }
