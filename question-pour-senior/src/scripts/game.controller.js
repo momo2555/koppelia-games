@@ -75,6 +75,8 @@ export class ControllerGame {
             question: null,
             choices: [],
             answer: [],
+            explanation: null,
+            explanationImage: null,
             selectedAnswer: null,
             buzzing: null,
             selectedPlay: null,
@@ -194,6 +196,12 @@ export class ControllerGame {
                 }
 
 
+            }
+
+
+            //manage explanation stage
+            if (state.stage == this.stages[5]) {
+                this.showExplanation(state.question, state.answer, state.explanation);
             }
 
         });
@@ -321,7 +329,7 @@ export class ControllerGame {
             this.addNewPlayer();
         });
 
-        this.buttonStopGame .on("click", (e) => {
+        this.buttonStopGame.on("click", (e) => {
             this.updateStageToEnd();
         });
 
@@ -346,6 +354,9 @@ export class ControllerGame {
         if (this.remainingQuestions.length > 0) {
             // take a random question from remaining questions
             const randomIndex = Math.floor(Math.random() * this.remainingQuestions.length);
+            /**
+             * @type {object}
+             */
             const randomQuestion = this.remainingQuestions[randomIndex];
 
             // Remove the question from remaining questions
@@ -357,6 +368,19 @@ export class ControllerGame {
             state.question = randomQuestion.question;
             state.choices = randomQuestion.choices;
             state.answer = randomQuestion.answer;
+            
+            if ("explanation" in randomQuestion) {
+                state.explanation = randomQuestion.explanation;
+            } else {
+                state.explanation = null;
+            }
+
+            if ("image" in randomQuestion) {
+                state.explanationImage = randomQuestion.image;
+            } else {
+                state.explanationImage = null;
+            }
+
             state.selectedAnswer = null;
 
             this.legend.setState(state);
@@ -390,6 +414,13 @@ export class ControllerGame {
                 choiceElements[i].addClass("right-response");
             }
         }
+    }
+
+
+    showExplanation(question, answer, explanation) {
+        $("#controller .question h2").text(question);
+        $("#controller #explanation-response-bloc p").text(answer);
+        $("#controller #explanation-text p").text(explanation);
     }
 
     /**

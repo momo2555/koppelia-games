@@ -106,6 +106,10 @@ export class MonitorGame {
 
             }
 
+            if (this.currentStage == this.stages[5]) {
+                this.showExplanation(state.question, state.answer, state.explanation, state.explanationImage, state.selectedPlay);
+            }
+
 
         });
 
@@ -148,6 +152,26 @@ export class MonitorGame {
         }
     }
 
+    /**
+     * 
+     * @param {string} question 
+     * @param {string} answer 
+     * @param {string} explanation 
+     * @param {string} image 
+     * @param {string} playId 
+     */
+    showExplanation(question, answer, explanation, image, playId) {
+        $("#monitor #explanation-question h2").text(question);
+        $("#monitor #explanation-response p").text(answer);
+        $("#monitor #explanation-text p").text(explanation);
+        let imageParsed = this.legend.parsePlayFile(playId, image, "img").then(
+            (val) => {
+                $("#monitor #explanation-image").html('<img src="' + val + '" />');
+            }
+
+        )
+    }
+
     checkAnswer() {
         let state = this.legend.getState();
         if (state.selectedAnswer != null) {
@@ -160,7 +184,7 @@ export class MonitorGame {
                 this.cancelPlayerBuzzing(true);
                 // show the result for two seconds
                 window.setTimeout(() => {
-                    this.deselectResponse(true);
+                    this.deselectResponse(true, state.explanation != null);
                     this.audio.playBackground();
                 }, 3000);
             } else {
@@ -229,10 +253,15 @@ export class MonitorGame {
     }
 
 
-    deselectResponse(requestNewQuestion = false) {
+    deselectResponse(requestNewQuestion = false, isThereExplanation = false) {
         let update = {};
-        if (requestNewQuestion)
-            update.stage = "explanation";
+        if (requestNewQuestion) {
+            // If request new question check if there is explanation
+            if (isThereExplanation)
+                update.stage = "explanation"; // go to explanation
+            else
+                update.question = null; // go next question
+        }
         update.selectedAnswer = null;
         update.noBuzzTime = false;
         this.legend.updateState(update);

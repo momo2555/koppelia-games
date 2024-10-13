@@ -17,17 +17,28 @@
                 "choices" : {
                     "type" : "list",
                     "label" : "Liste des choix",
+                    "minimum" : 2,
+                    "maximum" : 4,
                     "data" : {
                         "type" : "str",
-                        "label" : "Nouveau choix",
-                        "minimum" : 2,
-                        "maximum" : 4
+                        "label" : "Nouveau choix"
                     }
                 },
                 "answer" : {
                     "label" : "Réponse à la question",
                     "type" : "str",
                     "maximum" : 120
+                },
+                "explanation" : {
+                    "label": "Explication",
+                    "type": "str",
+                    "multiline": true
+                },
+                "image": {
+                    "label": "Illustration",
+                    "type": "media",
+                    "format": "image",
+                    "maximum": 1
                 }
             }
         }
