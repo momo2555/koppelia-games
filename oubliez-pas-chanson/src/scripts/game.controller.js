@@ -1,7 +1,5 @@
 //@ts-check
 
-import { PlayListElement } from './components/playListElement.js';
-
 export class ControllerGame {
 
     /**
@@ -11,12 +9,13 @@ export class ControllerGame {
 
     constructor(legend) {
         this.legend = legend;
-        this.stages = ["home", "identification", "plays", "game", "end-game", "special"];
+        this.stages = ["home", "game", "explanation", "end-game"];
         this.currentStage = "";
 
         // buttons
-        this.buttonPlay = $("#controller #button-play");
-        this.buttonExplanations = $("#controller #button-explanations");
+        this.buttonPlay = $("#controller #home-start-button");
+        this.buttonHowTo = $("#controller #home-how-to-button");
+        
         this.buttonIdBloc = $("#controller #id-bottom-bloc");
         this.buttonStartPlay = $("#plays-bottom-bloc");
         this.buttonResponse = $("#controller .response");
@@ -111,13 +110,13 @@ export class ControllerGame {
                 this.hideAllStages();
                 this.showStage(this.currentStage);
                 // launch init functions (init plays list on stage of choosing the play)
-                if (this.currentStage == this.stages[2]) {
+                /*if (this.currentStage == this.stages[2]) {
                     this.initPlayListStage();
-                }
+                }*/
             }
 
             // manage identification stage
-            if (state.stage == this.stages[1]) {
+            /*if (state.stage == this.stages[1]) {
                 if (state.buzzing != null) {
                     $('#id-list-players-bloc').hide();
                     $("#id-add-player-bloc").show();
@@ -155,15 +154,14 @@ export class ControllerGame {
                 } else {
                     $("#id-bottom-bloc p").text("Jouer sans joueurs");
                 }
-            }
+            }*/
 
             // manage game stage
-            if (state.stage == this.stages[3]) {
+            if (state.stage == this.stages[1]) {
                 // if there is no question, choose question
 
                 if (state.question == null) {
                     if (this.question != null) {
-                        console.log("ACCESSSS")
                         console.log(this.question, state.question)
                         // update question, THis is a security : to avaoid choosing several time a question
                         // It's like a mutex, but as we are in a monothread async env, I guess it's okay.
@@ -286,7 +284,7 @@ export class ControllerGame {
             this.legend.updateStateElement("stage", this.stages[1]);
         });
 
-        this.buttonExplanations.on("click", (e) => {
+        this.buttonHowTo.on("click", (e) => {
 
         });
 

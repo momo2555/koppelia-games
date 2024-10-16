@@ -1,0 +1,720 @@
+/* Background: #E4DCCF
+   Dark:       #0E2745
+   Yellow:     #FFC436
+   Blue:       #B3EEDA
+*/
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular.ttf);
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold-Italic.ttf);
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Italianno;
+    src: url(fonts/Italianno/Italianno-Regular.ttf);
+}
+
+@font-face {
+    font-family: JacquesFrancoisShadow;
+    src: url(fonts/JacquesFrancoisShadow/JacquesFrancoisShadow-Regular.ttf);
+}
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'Luciole', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #0E2745;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #E4DCCF;
+    margin: 0;
+    min-height: 100%;
+    width: 100wv;
+    height: 100hv;
+}
+
+
+.monitor-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#monitor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+#monitor #background-pres {
+
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+
+}
+
+#body-controller {
+    display: flex;
+}
+
+
+#background-pres h1 {
+    font-size: 130px;
+    margin: auto;
+    color: white;
+    font-weight: 200;
+
+
+}
+
+.logo {
+    background-image: url("../images/logo.jpg");
+    width: 120px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+
+/* MONITOR HOME PAGE */
+    
+
+
+.monitor-stage-hidden {
+    display: none;
+}
+
+#monitor-home {
+
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+}
+
+#monitor .big-logo {
+    background-image: url("../images/logo.jpg");
+    margin: auto;
+    height: 700px;
+    width: 700px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#controller .big-logo {
+    background-image: url("../images/logo.jpg");
+    margin: auto;
+    height: 70vw;
+    width: 70vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* MONITOR IDENTIFICATION */
+
+#monitor-identification {}
+
+
+#monitor-identification-top {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 200px;
+}
+
+#identification-instruction {
+    flex: 1;
+    display: flex;
+    margin: auto;
+}
+
+#identification-instruction h2 {
+    text-align: center;
+    width: 100%;
+    font-size: 80px;
+}
+
+#identification-player-info {
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 10%;
+    margin-top: 50px;
+    height: 150px;
+    border: 3px solid #FFC436;
+    border-radius: 30px;
+    display:  flex;;
+}
+
+#identification-player-info p {
+    margin: auto;
+    font-size: 60px;
+}
+
+.selected-color {
+    display: none;
+    top: 0;
+    height: 0;
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(255, 0, 221, 0.8057423653054971) 0%, rgba(0, 212, 255, 0) 100%);
+
+}
+
+/* MONITOR PLAYS LIST*/
+
+
+
+#monitor-plays {
+    overflow-y: scroll;
+    scrollbar-color: #FFC436 #FFF0CE;
+    scrollbar-width: 60px;
+}
+
+#monitor-plays-list {
+
+    margin: 100px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+#monitor .play-element-contain {
+    flex: 0 0 33.3%;
+    display: flex;
+}
+
+#monitor .play-element {
+    height: 420px;
+    width: 340px;
+    background-color: #FFC436;
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+#monitor .play-element-photo {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 85%;
+    height: 60%;
+    margin: 7.5%;
+}
+
+#monitor .play-name {
+    display: flex;
+    height: 15%;
+    margin: 7.5%;
+}
+
+#monitor .play-name p {
+    margin: auto;
+    font-size: 30px;
+}
+
+#monitor .play-selected {
+    background-color: #0C356A;
+}
+
+#monitor .play-selected p {
+    color: white;
+}
+
+
+/* MONITOR GAME */
+
+
+#monitor #game-top {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    padding: 20px;
+}
+
+#monitor #question {
+    display: inline-block;
+    background-color: white;
+    padding: 60px;
+    border-radius: 20px;
+    margin: auto;
+    font-size: 30px;
+}
+
+#monitor #question h2 {
+    margin: 0;
+}
+
+#monitor #game-bottom {
+    position: relative;
+    width: 100%;
+    height: 45%;
+    display: flex;
+}
+
+#monitor .response {
+    width: 500px;
+    height: 140px;
+    background-color: #0C356A;
+    position: absolute;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: flex;
+}
+
+#monitor .response-left {
+    left: 0;
+
+}
+
+#monitor .response-right {
+    right: 0;
+}
+
+#monitor .response-bottom {
+    top: 200px;
+}
+
+#monitor .response-left::after {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    border: 70px solid transparent;
+    border-left-color: #0E2745;
+    left: 500px
+}
+
+#monitor .response-right::after {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    border: 70px solid transparent;
+    border-right-color: #0E2745;
+    left: -139px;
+}
+
+#monitor .response::before {
+    color: white;
+    font-size: 45px;
+    font-family: 'Luciole';
+    margin: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-weight: 600;
+
+}
+
+#monitor #response-a::before {
+    content: "A.";
+}
+
+#monitor #response-b::before {
+    content: "B.";
+}
+
+#monitor #response-c::before {
+    content: "C.";
+}
+
+#monitor #response-d::before {
+    content: "D.";
+}
+
+#monitor .response p {
+    font-size: 45px;
+    color: white;
+    margin: auto;
+    flex: 1;
+    font-weight: 600;
+}
+
+#monitor .buzzing-user {
+    margin: auto;
+}
+
+#monitor .buzzing-user p {
+    display: none;
+    font-size: 60px;
+    font-family: 'Luciole';
+    font-weight: 600;
+    color: rgb(255, 0, 221)
+}
+
+#monitor .response-selected {
+    background-color: #FFC436;
+    color: #0E2745;
+}
+
+#monitor .response-selected::before {
+    background-color: #FFC436;
+    color: #0E2745;
+}
+
+#monitor .response-left.response-selected::after {
+    border-left-color: #FFC436;
+}
+
+#monitor .response-right.response-selected::after {
+    border-right-color: #FFC436;
+}
+
+#monitor .response-selected p {
+    color: #0E2745;
+}
+
+/* RESPONSE WRONG */
+#monitor .wrong-response {
+    background-color: #A81414;
+    color: white;
+}
+
+#monitor .wrong-response::before {
+    background-color: #A81414;
+    color: white;
+}
+
+#monitor .response-left.wrong-response::after {
+    border-left-color: #A81414;
+}
+
+#monitor .response-right.wrong-response::after {
+    border-right-color: #A81414;
+}
+
+#monitor .wrong-response p {
+    color: white;
+}
+
+
+/* RESPONSE RIGHT */
+#monitor .right-response {
+    background-color: #32a832;
+    color: white;
+}
+
+#monitor .right-response::before {
+    background-color: #32a832;
+    color: white;
+}
+
+#monitor .response-left.right-response::after {
+    border-left-color: #32a832;
+}
+
+#monitor .response-right.right-response::after {
+    border-right-color: #32a832;
+}
+
+#monitor .right-response p {
+    color: white;
+}
+
+
+/**
+MONITOR PODIUM
+**/
+
+#monitor #end-game-bravo {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    font-size: 80px;
+    color: #0C356A;
+}
+
+#monitor .podium-bloc {
+    background-color: #0174BE;
+    position: absolute;
+    width: 25%;
+    bottom: 0;
+    display: flex;
+}
+
+#monitor .podium-bloc p {
+    margin: auto;
+    color: black;
+    font-size: 80px;
+
+}
+
+#monitor #first-podium {
+    height: 45%;
+    left: 37.5%
+}
+
+#monitor #second-podium {
+    height: 30%;
+    left: 6.25%;
+}
+
+#monitor #third-podium {
+    height: 15%;
+    right: 6.25%;
+}
+
+#monitor .podium-name {
+    position: absolute;
+}
+
+#monitor .podium-name p {
+    margin: 0;
+    color: #0C356A;
+    font-size: 50px
+}
+
+#monitor #first-podium-name {
+    bottom: 48%;
+    left: 37.5%;
+}
+
+#monitor #second-podium-name {
+    bottom: 33%;
+    left: 6.25%;
+}
+
+#monitor #third-podium-name {
+    bottom: 18%;
+    left: 68.75%;
+}
+
+
+
+
+
+
+
+/* SPECIAL */
+
+#monitor #special-top {
+    width: 100%;
+    height: 85%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+
+}
+
+#monitor #special-bottom {
+    width: 100%;
+    height: 15%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+
+}
+
+#monitor #special-bottom p {
+    margin: auto;
+    background-color: #0C356A;
+    color: white;
+    padding: 10px 50px 10px 50px;
+    font-size: 50px;
+}
+
+#monitor .special-lyrics-bloc {
+    width: 100%;
+    flex: 1;
+    display: flex;
+}
+
+#monitor .special-lyrics-bloc p {
+    margin: auto;
+}
+
+#monitor .special-lyrics-back p {
+    color: #FFC436;
+    font-size: 30px;
+
+}
+
+#monitor .special-lyrics-current p {
+    color: #0C356A;
+    font-size: 60px;
+    font-weight: bold;
+}
+
+#monitor .special-lyrics-comming p {
+    color: #0174BE;
+    font-size: 30px;
+}
+
+
+
+
+
+
+/* EXPLANATION */
+
+#monitor #monitor-explanation {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+#monitor #explanation-top {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 1;
+    padding-top: 100px;
+}
+
+#monitor #explanation-bottom {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+#monitor #explanation-response {
+    width: 500px;
+    height: 140px;
+    background-color: #0C356A;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    display: flex;
+    position: relative;
+}
+
+#monitor #explanation-response::after {
+    display: inline-block;
+    content: '';
+    position: absolute;
+    border: 70px solid transparent;
+    border-left-color: #0C356A;
+    left: 500px
+}
+
+#monitor #explanation-response p {
+    font-size: 45px;
+    color: white;
+    margin: auto;
+    /* flex: 1; */
+    font-weight: 600;
+    
+}
+
+#monitor #explanation-question {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    padding-left: 85px;
+}
+#monitor #explanation-question h2 {
+    font-size: 35px;
+    margin: auto;
+}
+
+#monitor #explanation-text {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    padding-left: 45px;
+    display: flex;
+}
+
+#monitor #explanation-text p {
+    margin: auto;
+    font-size: 35px;
+}
+
+#monitor #explanation-image {
+    padding: 30px;
+    display: flex;
+    flex: 1;
+}
+
+#monitor #explanation-image img {
+    max-height: 50vh;
+    margin: auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+
+/* CONTROLLER HOME */
+
+
+.controller-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#controller {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.controller-stage-hidden {
+    display: none;
+}
+
+#controller #controller-home {
+    padding-top: 30px;
+}
+
+#controller .action-button {
+    display: flex;
+    background-color: #B3EEDA;
+    border: 2px solid #0E2745;
+    margin: 27px;
+    padding: 20px;
+}
+
+#controller .action-button p {
+    color: #0E2745;
+    font-size: 28px;
+    margin: auto;
+}

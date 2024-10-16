@@ -1,0 +1,9 @@
+{
+    "name" : "N'oubliez pas la chanson",
+    "icon" : "icon.png",
+    "banner" : "banner.webp",
+    "description_file" : false,
+    "description" : "Deviner la musque tout en chantant !",
+    "controller" : "controller.html",
+    "monitor": "monitor.html"
+}

@@ -368,7 +368,7 @@ export class ControllerGame {
             state.question = randomQuestion.question;
             state.choices = randomQuestion.choices;
             state.answer = randomQuestion.answer;
-            
+
             if ("explanation" in randomQuestion) {
                 state.explanation = randomQuestion.explanation;
             } else {

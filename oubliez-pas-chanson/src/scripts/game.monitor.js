@@ -1,4 +1,3 @@
-import { PlayListElement } from './components/playListElement.js';
 import { AudioController } from './controllers/audioController.js';
 
 export class MonitorGame {
@@ -11,7 +10,7 @@ export class MonitorGame {
     constructor(legend) {
         this.legend = legend;
         this.audio = new AudioController()
-        this.stages = ["home", "identification", "plays", "game", "end-game", "special"];
+        this.stages = ["home", "game", "explanation","end-game"];
         this.currentStage = "";
 
         this.playsListBloc = $("#monitor #monitor-plays-list");
@@ -22,6 +21,15 @@ export class MonitorGame {
 
         // temporary :( 
         this.specialBuzzed = false;
+
+        this.gameContent = [
+            {
+                sound: "music1/sound.mp3",
+                lyrics: "music1/lyrics.txt",
+                answer: "Edit Piaf",
+                image: "music1/image.jpg"
+            }
+        ]
 
         this.hideAllStages();
         this.initEvents();
@@ -68,9 +76,9 @@ export class MonitorGame {
                 this.showStage(this.currentStage);
                 // launch init functions (init plays list on stage of choosing the play)
                 // check if it is the fisrt time is is the play stage
-                if (this.currentStage == this.stages[2]) {
+                /*if (this.currentStage == this.stages[2]) {
                     this.initPlayListStage();
-                }
+                }*/
                 if (this.currentStage == this.stages[3]) {
                     this.audio.playBackground();
                 }
@@ -85,10 +93,10 @@ export class MonitorGame {
                     this.audio.pauseBackground();
                     this.audio.pauseOutro();
                 }
-                if (this.currentStage == this.stages[5]) {
+                /*if (this.currentStage == this.stages[5]) {
                     this.audio.pauseBackground();
                     this.audio.pauseOutro();
-                }
+                }*/
 
 
             }
