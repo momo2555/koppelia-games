@@ -15,18 +15,9 @@ export class ControllerGame {
         // buttons
         this.buttonPlay = $("#controller #home-start-button");
         this.buttonHowTo = $("#controller #home-how-to-button");
+        this.buttonGameNext = $("#controller #game-next-button");
+        this.buttonExplanationNext = $("#controller #explanation-next-button");
         
-        this.buttonIdBloc = $("#controller #id-bottom-bloc");
-        this.buttonStartPlay = $("#plays-bottom-bloc");
-        this.buttonResponse = $("#controller .response");
-        this.buttonGameVerif = $("#controller #game-verif-button");
-        this.buttonGamePass = $("#controller #game-pass-button");
-        this.buttonAddPlayer = $("#controller #id-player-add-player");
-        this.buttonStopGame = $("#controller #game-bottom-bloc");
-        this.buttonReturnHome = $("#controller #end-game-bottom-bloc");
-        this.buttonSpecial = $("#controller #go-special-button");
-        this.buttonStartSpecial = $("#controller #start-special-bottom-bloc");
-        this.buttonCheckSpecial = $("#controller #check-special-bottom-bloc");
 
 
         // entries
@@ -62,6 +53,7 @@ export class ControllerGame {
 
     showStage(stageName) {
         this.hideAllStages();
+        console.log("stagename = " + stageName);
         $('#controller #controller-' + stageName).show();
 
     }
@@ -74,14 +66,9 @@ export class ControllerGame {
         this.legend.setState({
             stage: this.stages[0],
             players: [],
-            question: null,
-            choices: [],
-            answer: [],
-            selectedAnswer: null,
+            music: null,
             buzzing: null,
             selectedPlay: null,
-            special: null,
-            entryPlayerName: "",
             noBuzzTime: false,
         });
     }
@@ -115,6 +102,9 @@ export class ControllerGame {
                 }*/
             }
 
+            if (state.stage == this.stages[2]) {
+                this.showExplanation(state.music)
+            }
             // manage identification stage
             /*if (state.stage == this.stages[1]) {
                 if (state.buzzing != null) {
@@ -157,7 +147,7 @@ export class ControllerGame {
             }*/
 
             // manage game stage
-            if (state.stage == this.stages[1]) {
+            /*if (state.stage == this.stages[1]) {
                 // if there is no question, choose question
 
                 if (state.question == null) {
@@ -196,7 +186,7 @@ export class ControllerGame {
                 }
 
 
-            }
+            }*/
 
         });
 
@@ -288,67 +278,22 @@ export class ControllerGame {
 
         });
 
-        this.buttonIdBloc.on("click", (e) => {
+        this.buttonGameNext.on("click", (e) => {
             this.legend.updateStateElement("stage", this.stages[2]);
         });
 
-        this.buttonStartPlay.on("click", (e) => {
-            let data = this.playList[this.selectedPLay].play_json;
-            this.remainingQuestions = data.questions;
-            this.legend.updateStateElement("stage", this.stages[3]);
-        });
-
-        // when click on an answer (on of 4 answers)
-        this.buttonResponse.on("click", (e) => {
-            this.deselectAllResponses();
-            $(e.target).addClass("selected");
-            this.legend.updateStateElement("selectedAnswer", $(e.target).children('p').first().text())
-        });
-
-        this.buttonGameVerif.on("click", (e) => {
-            // Send the response to be checked
-            this.legend.sendToMonitor({
-                action: "verif"
+        this.buttonExplanationNext.on("click", (e) => {
+            this.legend.updateState({
+                stage: this.stages[1],
+                music: null,
             });
-
-        });
-
-        this.buttonGamePass.on("click", (e) => {
-            // Pass the question and go next question
-            this.requestNewQuestion();
-
-        });
-
-        this.buttonAddPlayer.on("click", (e) => {
-            this.addNewPlayer();
-        });
-
-        this.buttonStopGame .on("click", (e) => {
-            this.updateStageToEnd();
-        });
-
-        this.buttonReturnHome.on("click", (e) => {
-            this.legend.updateStateElement("stage", this.stages[0]);
-        });
-
-        this.buttonSpecial.on("click", (e) => {
-            this.legend.updateStateElement("stage", this.stages[5]);
-        });
-
-        this.buttonStartSpecial.on("click", (e)=> {
-            this.legend.updateStateElement("special", true);
-
-        });
-
-        this.buttonCheckSpecial.on("click", (e) => {
-            this.legend.sendToMonitor({
-                checkSpecial: true
-            })
         });
 
         this.entryPlayerName.on('input', (e) => {
             this.legend.updateStateElement("entryPlayerName", this.entryPlayerName.val());
         });
+
+        
 
     }
 
@@ -402,18 +347,17 @@ export class ControllerGame {
         }
     }
 
+    showExplanation(music) {
+        $("#explanation-answer p").text(music.answer);
+        $("#explanation-image").html('<img src="content/'+music.image+'">');
+    }
+
     /**
      * Firgure out what button to show 
      * @param {string} selectedAnswer 
      */
     showVerifOrPassButton(selectedAnswer) {
-        if (selectedAnswer != null) {
-            this.buttonGameVerif.show();
-            this.buttonGamePass.hide();
-        } else {
-            this.buttonGameVerif.hide();
-            this.buttonGamePass.show();
-        }
+        
     }
 
     requestNewQuestion() {

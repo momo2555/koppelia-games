@@ -1,3 +1,5 @@
+//@ts-check
+
 import { AudioController } from './controllers/audioController.js';
 
 export class MonitorGame {
@@ -10,7 +12,7 @@ export class MonitorGame {
     constructor(legend) {
         this.legend = legend;
         this.audio = new AudioController()
-        this.stages = ["home", "game", "explanation","end-game"];
+        this.stages = ["home", "game", "explanation", "end-game"];
         this.currentStage = "";
 
         this.playsListBloc = $("#monitor #monitor-plays-list");
@@ -24,12 +26,29 @@ export class MonitorGame {
 
         this.gameContent = [
             {
+                name: "music1",
                 sound: "music1/sound.mp3",
                 lyrics: "music1/lyrics.txt",
-                answer: "Edit Piaf",
-                image: "music1/image.jpg"
+                answer: "Edith Piaf",
+                image: "music1/edith-piaf.jpg"
+            },
+            {
+                name: "music2",
+                sound: "music2/sound.mp3",
+                lyrics: "music2/lyrics.txt",
+                answer: "Joe Dassin",
+                image: "music2/joe_dassin.jpg"
+            },
+            {
+                name: "music3",
+                sound: "music3/sound.mp3",
+                lyrics: "music3/lyrics.txt",
+                answer: "Annie Cordy",
+                image: "music3/annie_cordy.jpg"
             }
         ]
+
+        this.currentMusic = null;
 
         this.hideAllStages();
         this.initEvents();
@@ -50,6 +69,7 @@ export class MonitorGame {
 
     showStage(stageName) {
         this.hideAllStages();
+        console.log("stagename = " + stageName);
         $('#monitor #monitor-' + stageName).show();
 
     }
@@ -71,78 +91,41 @@ export class MonitorGame {
         // State change
         this.legend.onStateChange((from, state) => {
             if (this.currentStage != state["stage"]) {
+                let lastStage = this.currentStage;
                 this.currentStage = state["stage"];
                 this.hideAllStages();
                 this.showStage(this.currentStage);
-                // launch init functions (init plays list on stage of choosing the play)
-                // check if it is the fisrt time is is the play stage
-                /*if (this.currentStage == this.stages[2]) {
-                    this.initPlayListStage();
-                }*/
-                if (this.currentStage == this.stages[3]) {
-                    this.audio.playBackground();
-                }
-                console.log(this.currentStage);
-                if (this.currentStage == this.stages[4]) {
-                    this.audio.pauseBackground();
-                    this.audio.playOutro();
-                    console.log("Show end game");
-                    this.showEndGame(state);
-                }
-                if (this.currentStage == this.stages[0]) {
-                    this.audio.pauseBackground();
-                    this.audio.pauseOutro();
-                }
-                /*if (this.currentStage == this.stages[5]) {
-                    this.audio.pauseBackground();
-                    this.audio.pauseOutro();
-                }*/
-
-
-            }
-            if (state.buzzing != null) {
-                this.showSlectedPlayer(state.buzzing);
-                if (this.buzzing == null) {
-                    // make the sound once, not at each time the state is resent
-                    this.audio.playBuzz();
-                    this.audio.pauseBackground();
-                }
-            } else {
-                this.hideSelectedPlayer();
-            }
-            this.buzzing = state.buzzing;
-
-            // cHECK if it is play stage (different for the one before)
-            if (this.currentStage == this.stages[2]) {
-                this.deselectAllPlays();
-                if (state.selectedPlay != null) {
-                    this.selectPlay(state.selectedPlay);
-                }
-            }
-
-            if (state.question != null) {
-                this.showQuestion(state.question, state.choices, state.selectedAnswer);
-
-            }
-
-            if (this.currentStage == this.stages[5]) {
-                if (state.special != null && state.special != this.special) {
-                    if (state.special == true) {
-                        // start the special
-                        this.showSpecial(state);
-
+                
+                if(state["stage"] == this.stages[1]) {
+                    if (lastStage == this.stages[2]) {
+                        this.currentMusic = null;
+                        state.music = null;
                     }
                 }
-                this.special = state.special;
-                // 
-                if (state.buzzing != null && !this.specialBuzzed) {
-                    $("#special-bottom p").css(
-                        {
-                            "background-color": state.buzzing.color,
-                        }
-                    );
-                    this.specialBuzzed = true;
+
+
+            }
+
+
+            // Launch the game
+            if (this.currentStage == this.stages[1]) {
+
+                // if there is no music choose one
+                if (state.music == null) {
+                    this.chooseMusic();
                 }
+
+                // if there is a music but no music played start a music
+                if (state.music != null && this.currentMusic == null) {
+                    this.showGame(state);
+                }
+
+                this.currentMusic = state.music;
+
+            }
+
+            if (state.stage == this.stages[2]) {
+                this.showExplanation(state.music);
             }
 
 
@@ -157,22 +140,12 @@ export class MonitorGame {
                 }
             }
 
-            if ('play' in data) {
-                console.log(data);
-                const play = data.play;
-                // add a play in the play list
-                this.playList[play.play_id] = play;
-                // Add it as an element 
-                let playEl = new PlayListElement(play.play_id, play.play_name, play.play_image).getMonitorElement();
-                this.playsListBloc.append(playEl.content);
-            }
-
-            if ('checkSpecial' in data) {
-                // execute an action sent by controller
-                if (data.checkSpecial == true) {
-                    this.checkSpecialAnswer();
-                }
-            }
+            // if ('checkSpecial' in data) {
+            //     // execute an action sent by controller
+            //     if (data.checkSpecial == true) {
+            //         this.checkSpecialAnswer();
+            //     }
+            // }
 
 
         });
@@ -198,35 +171,7 @@ export class MonitorGame {
     }
 
     checkAnswer() {
-        let state = this.legend.getState();
-        if (state.selectedAnswer != null) {
-            if (state.selectedAnswer == state.answer) {
-                // the chosen answer is right
-                $(".response-selected").addClass("right-response");
-                this.audio.pauseBackground();
-                this.audio.playRight();
-                // cancel the player who is buzzing
-                this.cancelPlayerBuzzing(true);
-                // show the result for two seconds
-                window.setTimeout(() => {
-                    this.deselectResponse(true);
-                    this.audio.playBackground();
-                }, 3000);
-            } else {
-                // the chosen answer is wrong
-                $(".response-selected").addClass("wrong-response");
-                this.audio.pauseBackground();
-                this.audio.playWrong();
-                // cancel the player who is buzzing
-                this.cancelPlayerBuzzing(false);
-                // show the result for two seconds
-                window.setTimeout(() => {
-                    this.deselectResponse(false);
-                    this.audio.playBackground();
-                }, 1500);
-            }
 
-        }
     }
 
     showEndGame(state) {
@@ -272,14 +217,21 @@ export class MonitorGame {
         } else {
             podium.hide();
         }
-
-
-
     }
 
-    showSpecial(state) {
+    showExplanation(music) {
+        this.audio.pauseCustom(music.name);
+        $("#explanation-answer p").text(music.answer);
+        $("#explanation-image").html('<img src="content/' + music.image + '">');
+    }
+
+    showGame(state) {
+        let music = state.music;
         // parse the lyrics 
-        const filePath = '/game/content/lyrics.txt';
+        // add the music in sound controller
+        this.audio.addCustom(music.name, "content/" + music.sound)
+        // Fetch the music lyrics
+        const filePath = '/game/content/' + music.lyrics;
 
         // Using the fetch API to read the file
         fetch(filePath)
@@ -292,7 +244,7 @@ export class MonitorGame {
             .then(text => {
                 // parse the lyrics
                 this.lyrics = [];
-                this.goodAnswer = "Michel Sardou";
+                /*this.goodAnswer = "Michel Sardou";
                 this.specialAnswers = [
                     {
                         answer: "Charles Aznavour",
@@ -312,7 +264,7 @@ export class MonitorGame {
                     },
                 ]
                 this.specialSelectedAnswer = null;
-                this.specialAnswerIndex = 1;
+                this.specialAnswerIndex = 1;*/
 
 
 
@@ -330,19 +282,13 @@ export class MonitorGame {
                 console.log(this.lyrics);
                 this.shownLyrics = [null, null, this.lyrics[0], this.lyrics[1], this.lyrics[2]];
                 this.lyricIndex = 2;
-                this.audio.playSpecial();
+                this.audio.playCustom(music.name);
                 let startTime = Math.floor(Date.now() / 1000);
                 this.incrementLyrics();
-                this.incrementSpecialAnswer();
-
-
             })
             .catch(error => {
                 console.error('There has been a problem with your fetch operation:', error);
             });
-
-
-
     }
 
     incrementLyrics() {
@@ -363,15 +309,18 @@ export class MonitorGame {
         this.shownLyrics.shift();
         this.lyricIndex++;
         this.shownLyrics.push(this.lyrics[this.lyricIndex]);
-        if (state.buzzing == null) {
+        if (state.stage == this.stages[1]) {
             window.setTimeout(() => {
                 this.incrementLyrics();
             }, (this.shownLyrics[2].time - this.shownLyrics[1].time) * 1000);
         }
-
     }
 
-    incrementSpecialAnswer() {
+    updateStageToEnd() {
+        this.legend.updateStateElement("stage", this.stages[3]);
+    }
+
+    /*incrementSpecialAnswer() {
 
         let state = this.legend.getState();
         if (state.buzzing == null) {
@@ -439,90 +388,32 @@ export class MonitorGame {
             }, 4000);
         }
 
-    }
+    }*/
 
-    requestNewQuestion() {
-        // to request a new question just set the question field of the state to null
-        this.legend.updateStateElement("question", null);
-    }
+    chooseMusic() {
+        if (this.gameContent.length > 0) {
+            const randomIndex = Math.floor(Math.random() * this.gameContent.length);
+            const randomMusic = this.gameContent[randomIndex];
 
-    deselectResponse(requestNewQuestion = false) {
-        let update = {};
-        if (requestNewQuestion)
-            update.question = null;
-        update.selectedAnswer = null;
-        update.noBuzzTime = false;
-        this.legend.updateState(update);
-        $(".response").removeClass("response-selected");
-        $(".response").removeClass("right-response");
-        $(".response").removeClass("wrong-response");
-    }
+            // Remove the question from remaining questions
+            this.gameContent.splice(randomIndex, 1);
+            console.log(this.gameContent.length);
 
-    cancelPlayerBuzzing(isRight) {
-        let state = this.legend.getState();
-
-
-        state = this.AddUserScore(state, isRight);
+            // Update the state:
+            let state = this.legend.getState();
+            this.legend.updateStateElement("music", randomMusic);
 
 
 
-        // Cancel de Buzz
-        state.buzzing = null
-        state.noBuzzTime = true;
-        this.legend.setState(state);
-        console.log("Cancel buzz", state.players);
-    }
+        } else {
+            // end game
+            this.updateStageToEnd();
 
-    AddUserScore(state, isRight) {
-        if (state.players.length > 0 && state.buzzing != null) {
-            // If there are players playing
-            for (let player of state.players) {
-                if (player.id == state.buzzing.id) {
-                    if (isRight)
-                        // ADD SCORE 
-                        player.score += 1;
-                    else
-                        // ADD PENALITY
-                        player.penalityTime = Date.now() + this.penalityTime;
-                }
-            }
         }
-        return state;
     }
 
-    showSlectedPlayer(buzzing) {
-        $(".selected-color").show();
-        $(".selected-color").css({
-            background: "linear-gradient(180deg, " + buzzing.color + " 0%, rgba(0, 212, 255, 0) 100%)"
-        });
-        $("#identification-player-info p").show();
-        $("#identification-player-info p").css({
-            "color": buzzing.color
-        });
-        $("#identification-player-info").css({
-            "border-color": buzzing.color,
-        });
-        let state = this.legend.getState();
-        $("#identification-player-info p").text(state.entryPlayerName);
-        $(".buzzing-user p").show();
-        $(".buzzing-user p").text(buzzing.name);
-        $(".buzzing-user p").css({
-            "color": buzzing.color,
-        });
-    }
 
-    showSlectedPlayerName(buzzing) {
-
-    }
-
-    hideSelectedPlayer() {
-        $(".selected-color").hide();
-        $("#identification-player-info").css({
-            "border-color": "#FFC436"
-        });
-        $("#identification-player-info p").hide();
-        $(".buzzing-user p").hide();
-    }
 
 
 }
+

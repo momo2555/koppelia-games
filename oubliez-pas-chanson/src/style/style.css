@@ -50,7 +50,7 @@ html {
 }
 
 body {
-    background-color: #E4DCCF;
+    background-color: #ffe5f9;
     margin: 0;
     min-height: 100%;
     width: 100wv;
@@ -96,7 +96,7 @@ body {
 }
 
 .logo {
-    background-image: url("../images/logo.jpg");
+    background-image: url("../images/logo.png");
     width: 120px;
     height: 120px;
     background-size: contain;
@@ -125,7 +125,7 @@ body {
 }
 
 #monitor .big-logo {
-    background-image: url("../images/logo.jpg");
+    background-image: url("../images/logo.png");
     margin: auto;
     height: 700px;
     width: 700px;
@@ -134,7 +134,7 @@ body {
 }
 
 #controller .big-logo {
-    background-image: url("../images/logo.jpg");
+    background-image: url("../images/logo.png");
     margin: auto;
     height: 70vw;
     width: 70vw;
@@ -521,16 +521,22 @@ MONITOR PODIUM
 
 
 /* SPECIAL */
+#monitor #monitor-game {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
 
 #monitor #special-top {
-    width: 100%;
-    height: 85%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin: auto;
+    height: 70%;
     display: flex;
-    flex-direction: column;
-
+    flex-direction: column; 
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid #0E2745;
+    width: 80%;
 }
 
 #monitor #special-bottom {
@@ -563,19 +569,21 @@ MONITOR PODIUM
 
 #monitor .special-lyrics-back p {
     color: #FFC436;
-    font-size: 30px;
-
+    font-size: 24px;
+    text-align: center;
 }
 
 #monitor .special-lyrics-current p {
     color: #0C356A;
-    font-size: 60px;
+    font-size: 45px;
     font-weight: bold;
+    text-align: center;
 }
 
 #monitor .special-lyrics-comming p {
     color: #0174BE;
-    font-size: 30px;
+    font-size: 24px;
+    text-align: center;
 }
 
 
@@ -587,82 +595,29 @@ MONITOR PODIUM
 
 #monitor #monitor-explanation {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
     width: 100%;
 }
 
-#monitor #explanation-top {
+
+#monitor #explanation-answer {
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex: 1;
-    padding-top: 100px;
-}
-
-#monitor #explanation-bottom {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-}
-
-#monitor #explanation-response {
-    width: 500px;
-    height: 140px;
-    background-color: #0C356A;
-    margin-bottom: 15px;
-    margin-top: 15px;
-    display: flex;
-    position: relative;
-}
-
-#monitor #explanation-response::after {
-    display: inline-block;
-    content: '';
-    position: absolute;
-    border: 70px solid transparent;
-    border-left-color: #0C356A;
-    left: 500px
-}
-
-#monitor #explanation-response p {
-    font-size: 45px;
-    color: white;
-    margin: auto;
-    /* flex: 1; */
-    font-weight: 600;
-    
-}
-
-#monitor #explanation-question {
-    flex: 1;
-    display: flex;
-    padding: 20px;
-    padding-left: 85px;
-}
-#monitor #explanation-question h2 {
-    font-size: 35px;
-    margin: auto;
-}
-
-#monitor #explanation-text {
     width: 50%;
-    height: 100%;
-    padding: 20px;
-    padding-left: 45px;
-    display: flex;
 }
 
-#monitor #explanation-text p {
+#monitor #explanation-answer p {
     margin: auto;
-    font-size: 35px;
+    font-size: 60px;
+    font-weight: bold;
 }
+
+
 
 #monitor #explanation-image {
     padding: 30px;
     display: flex;
-    flex: 1;
+    width: 50%;
 }
 
 #monitor #explanation-image img {
@@ -672,6 +627,35 @@ MONITOR PODIUM
     overflow: hidden;
 }
 
+/*  END GAME  */
+
+#monitor #monitor-end-game {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding-top: 200px;
+}
+
+#monitor #end-game-bravo {
+    display: flex;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#monitor #end-game-bravo p {
+    margin: auto;
+}
+
+#monitor #end-game-image {
+    flex: 1;
+    display: flex;
+}
+
+#monitor #end-game-image img {
+    height: 300px;
+    margin: auto;
+}
 
 
 
@@ -717,4 +701,53 @@ MONITOR PODIUM
     color: #0E2745;
     font-size: 28px;
     margin: auto;
+}
+
+#controller #controller-game {
+    display: flex;
+    flex-direction: column;
+}
+
+#controller #game-consign-text {
+    flex: 1;
+    margin-top: 140px;
+    display: flex;
+}
+
+#controller #game-consign-text p {
+    margin: auto;
+}
+
+
+
+/* EXPLANATION */
+
+#controller-explanation {
+    padding-top: 160px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#controller #explanation-answer {
+    display: flex;
+    height: 90px;
+}
+
+#controller #explanation-answer p {
+    margin: auto;
+    font-size: 25px;
+}
+
+#controller #explanation-image  {
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex: 1;
+}
+
+#controller #explanation-image img  {
+    width: 90%;
+    margin: auto;
+    border-radius: 20px;
 }

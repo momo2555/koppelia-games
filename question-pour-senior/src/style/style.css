@@ -958,6 +958,22 @@ MONITOR PODIUM
 
 /* CONTROLLER GAME */
 
+#controller #game-top {
+    flex: 1;
+    overflow-y: scroll;
+    padding-bottom: 200px;
+}
+
+#controller #game-bottom {
+    
+}
+
+#controller #controller-game {
+    display: flex;
+    flex-direction: column;
+}
+
+
 #controller .question p {
     margin: 0;
 }
@@ -1006,9 +1022,7 @@ MONITOR PODIUM
 }
 
 #controller #game-bottom-bloc {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    
 }
 
 #controller .response::before {
@@ -1076,6 +1090,7 @@ MONITOR PODIUM
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 
 #controller #explanation-top {
