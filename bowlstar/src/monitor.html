@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Questions pour un Sénior</title>
+</head>
+
+<body>
+
+    <div id="monitor">
+
+        
+        <div class="monitor-stage monitor-stage-hidden" id="monitor-home">
+            
+            <div class="grand-icon">
+                <img src="images/logo.png" />
+            </div>
+
+        </div>
+
+        <div class="monitor-stage  monitor-stage-hidden" id="monitor-identification">
+            
+            <div class="bowl1 bowl" id="id-bowl1">
+
+            </div>
+            <div class="bowl2 bowl" id="id-bowl2">
+
+            </div>
+            <div class="bowl3 bowl" id="id-bowl3">
+
+            </div>
+
+
+        </div>
+
+       
+
+        <div class="monitor-stage" id="monitor-game">
+            
+            <div class="bowl1 bowl" id="gm-bowl1">
+
+            </div>
+            <div class="bowl2 bowl" id="gm-bowl2">
+
+            </div>
+            <div class="bowl3 bowl" id="gm-bowl3">
+
+            </div>
+
+            <div class="white-panel">
+                <p>
+                    0 pts
+                </p>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="monitor-stage monitor-stage-hidden" id="monitor-end-game">
+            <div class="logo">
+
+            </div>
+
+            <div class="white-panel">
+                <p>
+                    Bravo !!
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="lib/legend.js"></script>
+    <script type="module" src="scripts/game.monitor.js"></script>
+    <script type="module" src="scripts/components/playListElement.js"></script>
+    <script type="module" src="scripts/controllers/audioController.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script type="module">
+        import { Legend } from './lib/legend.js';
+        import { MonitorGame } from './scripts/game.monitor.js';
+
+        var legend = new Legend('monitor');
+        legend.onReady(() => {
+            //start page script
+            new MonitorGame(legend);
+        });
+
+    </script>
+</body>
+
+</html>

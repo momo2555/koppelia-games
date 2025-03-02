@@ -1,0 +1,9 @@
+{
+    "name" : "Question pour un Sénior",
+    "icon" : "icon.png",
+    "banner" : "banner.webp",
+    "description_file" : false,
+    "description" : "C'est le jeu officiel du pendu !",
+    "controller" : "controller.html",
+    "monitor": "monitor.html"
+}

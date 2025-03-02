@@ -1,0 +1,14 @@
+{
+  "name": "question-pour-senior",
+  "version": "1.0.0",
+  "description": "Jeux Koppelia - Question pour un senior",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "legendary": "github:momo2555/legendary"
+  },
+  "author": "Mohamed Al Glawi",
+  "license": "ISC"
+}

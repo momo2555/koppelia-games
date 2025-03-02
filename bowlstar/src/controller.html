@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Le Pendu</title>
+</head>
+
+<body id="body-controller">
+    <div id="controller">
+        <div class="controller-stage controller-stage-hidden" id="controller-home">
+            <div class="grand-icon">
+                <img src="images/logo.png" />
+            </div>
+            <div id="home-buttons-bloc">
+                <div class="home-button" id="button-play">
+                    <p>
+                        Jouer
+                    </p>
+                </div>
+                <div class="home-button" id="button-explanations">
+                    <p>
+                        Explications
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controller-stage controller-stage-hidden" id="controller-identification">
+            <div class="logo"></div>
+            <div id="identification-global">
+                <div id="id-central-bloc">
+                    <div id="id-players">
+
+                        <p>
+                            Appuyer sur un champignon pour le l'identifier et placez le à la vertical selon la
+                            l'emplacement proposé à l'écran.
+                        </p>
+
+
+                    </div>
+
+                </div>
+                <div class="bottom-button" id="id-start-game">
+                    <p>
+                        Commencer
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="controller-stage controller-stage-hidden" id="controller-game">
+            <div class="logo"></div>
+
+            <div id="game-top">
+
+                
+            </div>
+
+            <div id="game-bottom">
+                <div class="bottom-button" id="game-bottom-bloc">
+                    <p>
+                        Arrêter la partie
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="controller-stage controller-stage-hidden" id="controller-end-game">
+            <div class="logo"></div>
+
+            <div class="bottom-button" id="end-game-bottom-bloc">
+                <p>
+                    Retour à l'accueil
+                </p>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <script type="module" src="lib/legend.js"></script>
+    <script type="module" src="scripts/game.controller.js"></script>
+    <script type="module" src="scripts/components/playListElement.js"></script>
+    <script src="scripts/jquery.js"></script>
+    <script type="module">
+        import { Legend } from './lib/legend.js';
+        import { ControllerGame } from './scripts/game.controller.js';
+
+        var legend = new Legend('controller');
+        legend.onReady(() => {
+            //start page script
+            new ControllerGame(legend);
+        });
+
+    </script>
+
+</body>
+
+</html>

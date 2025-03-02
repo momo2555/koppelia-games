@@ -1,0 +1,455 @@
+/* Background: #68BCDB
+   Dark:       #0C356A
+   Yellow:     #FFC436
+   Blue:       #0174BE
+*/
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular.ttf);
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Regular-Italic.ttf);
+    font-style: italic;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Luciole;
+    src: url(fonts/Luciole/Luciole-Bold-Italic.ttf);
+    font-style: italic;
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Italianno;
+    src: url(fonts/Italianno/Italianno-Regular.ttf);
+}
+
+@font-face {
+    font-family: JacquesFrancoisShadow;
+    src: url(fonts/JacquesFrancoisShadow/JacquesFrancoisShadow-Regular.ttf);
+}
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'Luciole', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #0C356A;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #68BCDB;
+    margin: 0;
+    min-height: 100%;
+    width: 100wv;
+    height: 100hv;
+}
+
+
+.monitor-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#monitor {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+#monitor #background-pres {
+
+    display: flex;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+
+}
+
+#body-controller {
+    display: flex;
+}
+
+
+#background-pres h1 {
+    font-size: 130px;
+    margin: auto;
+    color: white;
+    font-weight: 200;
+
+
+}
+
+.logo {
+    background-image: url("../images/logo.png");
+    width: 300px;
+    height: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+/* MONITOR HOME PAGE */
+
+#monitor-home {
+    display: flex;
+
+}
+
+#monitor-home .grand-icon {
+    width: 50%;
+    margin: auto;
+}
+
+#monitor-home .grand-icon img {
+    width: 100%;
+}
+
+
+
+
+.monitor-stage-hidden {
+    display: none;
+}
+
+
+#left-deco-bloc {
+    height: 400px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 500px;
+}
+
+
+
+
+/* MONITOR IDENTIFICATION */
+
+#monitor-identification {
+    position: relative;
+}
+
+#monitor .bowl {
+    background-color: grey;
+    height: 350px;
+    width: 350px;
+    border-radius: 175px;
+    position: absolute;
+}
+
+#monitor .bowl1 {
+    left: 200px;
+    bottom: 200px;
+}
+
+#monitor .bowl2 {
+    left: calc(50% - 175px);
+    top: 200px;
+}
+
+#monitor .bowl3 {
+    right: 200px;
+    bottom: 200px;
+}
+
+
+
+/* MONITOR GAME */
+
+
+#monitor #game-top {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    padding: 20px;
+}
+
+#monitor .white-panel {
+
+    background-color: white;
+    display: flex;
+    position: absolute;
+    width: 20%;
+    bottom: 0;
+    left: 40%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 220px;
+
+}
+
+#monitor .white-panel p {
+    margin: auto;
+    font-size: 45px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* CONTROLLER HOME */
+
+
+.controller-stage {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+
+#controller {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+.controller-stage-hidden {
+    display: none;
+}
+
+#controller-home .grand-icon {
+    width: 80%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+#controller-home .grand-icon img {
+    width: 100%;
+}
+
+#controller #home-buttons-bloc {
+    margin: 50px;
+}
+
+#controller .home-button {
+    background-color: #F7D017;
+    display: flex;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 30px;
+}
+
+#controller .home-button p {
+    color: black;
+    margin: auto;
+}
+
+#controller #home-bottom-bloc {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    left: 0;
+}
+
+#controller .host-img {
+    margin: auto;
+    height: 400px;
+}
+
+#controller .host-img img {
+    object-fit: cover;
+    height: 100%;
+
+}
+
+
+
+/* CONTROLLER IDENTIFICATION */
+
+#controller #identification-global {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+#controller #id-central-bloc {
+    flex: 1;
+    display: flex;
+}
+
+#controller #id-bottom-bloc {}
+
+#controller #id-bottom-bloc p {}
+
+
+
+#controller #id-players {
+    margin: auto;
+    width: 80%;
+    height: 400px;
+    border-radius: 30px;
+    background-color: white;
+    padding: 20px;
+}
+
+
+
+
+
+#controller .bottom-button {
+    height: 70px;
+    background-color: #F7D017;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 30px;
+}
+
+#controller .bottom-button p {
+    color: black;
+    margin: auto;
+    font-size: 30px;
+}
+
+#controller .id-player-element {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    margin: 20px;
+}
+
+#controller .id-player-element p {}
+
+
+/* CONTROLLER PLAYS LIST */
+
+#controller #controller-plays {
+    flex-direction: column;
+}
+
+#controller #plays-header {
+    width: 100%;
+    height: 100px;
+}
+
+#controller #plays-page {
+    overflow-y: scroll;
+    flex: 1;
+    height: calc(100% - 100px - 70px);
+}
+
+#controller #plays-bottom-bloc {}
+
+#controller .play-element {
+    height: 170px;
+    width: 90%;
+    background-color: #FFC436;
+    border-radius: 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+#controller .play-element.selected {
+    border: 4px solid #0174BE;
+}
+
+#controller .play-element-photo {
+    object-fit: cover;
+    border-radius: 10px;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    margin-left: 10px;
+}
+
+#controller .play-name {
+    display: flex;
+    flex: 1;
+}
+
+#controller .play-name p {
+    margin: auto;
+    font-size: 20px;
+}
+
+
+
+/* CONTROLLER GAME */
+
+#controller #game-top {
+    flex: 1;
+    overflow-y: scroll;
+    padding-bottom: 200px;
+}
+
+#controller #game-bottom {}
+
+#controller #controller-game {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#controller #game-bottom-bloc {}
+
+
+
+
+
+/* EXPLANATION */
+
+#controller #controller-explanation {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+#controller #explanation-top {
+    flex: 1;
+}
+
+#controller #explanation-response-bloc {}
+
+#controller #explanation-text {
+    width: 100%;
+    display: flex;
+    padding: 30px;
+}
+
+#controller #explanation-text {
+    margin: auto;
+}
+
+#controller #explanation-title {
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+#controller #explanation-next-button {}
